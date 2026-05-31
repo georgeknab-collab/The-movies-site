@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Hub - Home</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#070707;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+nav{
+    width:100%;
+    height:80px;
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 50px;
+    background:rgba(0,0,0,0.7);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+}
+
+.logo{
+    font-size:35px;
+    font-weight:bold;
+    color:#ff3131;
+    text-shadow:0 0 20px #ff3131;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+    font-size:18px;
+}
+
+nav a:hover{
+    color:#ff3131;
+}
+
+/* HERO */
+
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+    url("https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1600&auto=format&fit=crop");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero-content h1{
+    font-size:90px;
+    margin-bottom:20px;
+    animation:glow 2s infinite alternate;
+}
+
+.hero-content p{
+    font-size:25px;
+    color:#cccccc;
+    margin-bottom:30px;
+}
+
+.hero-content button{
+    padding:18px 45px;
+    border:none;
+    border-radius:50px;
+    background:#ff3131;
+    color:white;
+    font-size:20px;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 25px #ff3131;
+}
+
+.hero-content button:hover{
+    transform:scale(1.1);
+    background:#ff5555;
+}
+
+/* TRENDING */
+
+.trending{
+    padding:120px 50px;
+}
+
+.section-title{
+    font-size:55px;
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.movie-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:35px;
+}
+
+.movie-card{
+    background:#121218;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.4s;
+    box-shadow:0 0 20px rgba(255,49,49,0.15);
+}
+
+.movie-card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 0 40px rgba(255,49,49,0.5);
+}
+
+.movie-card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+}
+
+.movie-info{
+    padding:20px;
+}
+
+.movie-info h2{
+    margin-bottom:10px;
+}
+
+.movie-info p{
+    color:#bbbbbb;
+    margin-bottom:20px;
+}
+
+.watch-btn{
+    display:inline-block;
+    padding:12px 25px;
+    background:#ff3131;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    transition:0.3s;
+}
+
+.watch-btn:hover{
+    background:#ff5555;
+}
+
+/* STATS */
+
+.stats{
+    display:flex;
+    justify-content:center;
+    gap:60px;
+    padding:80px 20px;
+    background:#111;
+    flex-wrap:wrap;
+}
+
+.stat-box{
+    text-align:center;
+}
+
+.stat-box h1{
+    font-size:60px;
+    color:#ff3131;
+}
+
+.stat-box p{
+    color:#bbbbbb;
+    font-size:20px;
+}
+
+/* FOOTER */
+
+footer{
+    background:#050505;
+    text-align:center;
+    padding:30px;
+    color:#777;
+}
+
+/* GLOW */
+
+@keyframes glow{
+    from{
+        text-shadow:0 0 10px #ff3131;
+    }
+
+    to{
+        text-shadow:
+        0 0 20px #ff3131,
+        0 0 40px #ff3131,
+        0 0 60px #ff3131;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+
+<div class="logo">MOVIE HUB</div>
+
+<ul>
+<li><a href="home.html">Home</a></li>
+<li><a href="movies.html">Movies</a></li>
+<li><a href="upload.html">Upload</a></li>
+<li><a href="contact.html">Contact</a></li>
+<li><a href="chatbot.html">Vault ai</a></li>
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>MOVIE HUB</h1>
+
+<p>Watch movies created by friends around the world.</p>
+
+<button>Explore Movies</button>
+
+</div>
+
+</section>
+
+<section class="trending">
+
+<h1 class="section-title">Trending Movies</h1>
+
+<div class="movie-grid">
+
+<div class="movie-card">
+
+<img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop">
+
+<div class="movie-info">
+
+<h2>Zombie Escape</h2>
+
+<p>A thrilling zombie apocalypse adventure.</p>
+
+<a class="watch-btn" href="movie.html">Start Movie</a>
+
+</div>
+</div>
+
+<div class="movie-card">
+
+<img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=1200&auto=format&fit=crop">
+
+<div class="movie-info">
+
+<h2>Galaxy Mission</h2>
+
+<p>A dangerous mission deep into space.</p>
+
+<a class="watch-btn" href="movie1.html">Watch Movie</a>
+
+</div>
+</div>
+
+<div class="movie-card">
+
+<img src="https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=1200&auto=format&fit=crop">
+
+<div class="movie-info">
+
+<h2>The Final Night</h2>
+
+<p>Mystery and survival during one strange night.</p>
+
+<a class="watch-btn" href="movie2.html">Watch Movie</a>
+
+</div>
+</div>
+
+</div>
+
+</section>
+
+<section class="stats">
+
+<div class="stat-box">
+<h1>3</h1>
+<p>Movies Uploaded</p>
+</div>
+
+<div class="stat-box">
+<h1>0K</h1>
+<p>Total Views</p>
+</div>
+
+<div class="stat-box">
+<h1>6+</h1>
+<p>Creators</p>
+</div>
+
+</section>
+
+<footer>
+
+© 2026 Movie Hub | Built For You
+
+</footer>
+
+</body>
+</html>
