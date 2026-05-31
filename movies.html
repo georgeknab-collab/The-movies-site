@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Hub - Movies</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#070707;
+    color:white;
+}
+
+/* NAVBAR */
+
+nav{
+    width:100%;
+    height:80px;
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 50px;
+    background:rgba(0,0,0,0.7);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+}
+
+.logo{
+    font-size:35px;
+    font-weight:bold;
+    color:#ff3131;
+    text-shadow:0 0 20px #ff3131;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#ff3131;
+}
+
+/* HEADER */
+
+.header{
+    padding-top:120px;
+    text-align:center;
+}
+
+.header h1{
+    font-size:60px;
+    color:#ff3131;
+    text-shadow:0 0 20px #ff3131;
+}
+
+.header p{
+    color:#bbbbbb;
+    margin-top:10px;
+    font-size:18px;
+}
+
+/* MOVIE GRID */
+
+.movie-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+    padding:80px 50px;
+}
+
+.movie-card{
+    background:#121218;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.3s;
+}
+
+.movie-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 30px rgba(255,49,49,0.4);
+}
+
+.movie-card img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+}
+
+.movie-info{
+    padding:20px;
+}
+
+.movie-info h2{
+    margin-bottom:10px;
+}
+
+.movie-info p{
+    color:#bbbbbb;
+    margin-bottom:15px;
+}
+
+.watch-btn{
+    display:inline-block;
+    padding:12px 25px;
+    background:#ff3131;
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    transition:0.3s;
+}
+
+.watch-btn:hover{
+    background:#ff5555;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:30px;
+    color:#777;
+    background:#050505;
+    margin-top:50px;
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+
+<div class="logo">MOVIE HUB</div>
+
+<div>
+<a href="inde x.html">Home</a>
+<a href="movies.html">Movies</a>
+<a href="upload.html">Upload</a>
+<a href="contact.html">Contact</a>
+<a href="chatbot.html">Vault ai</a></li>
+</div>
+
+</nav>
+
+<div class="header">
+
+<h1>All Movies</h1>
+<p>Browse all movies created by the community</p>
+
+</div>
+
+<section class="movie-grid">
+
+<!-- MOVIE 1 -->
+<div class="movie-card">
+<img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop">
+<div class="movie-info">
+<h2>Zombie Escape</h2>
+<p>A thrilling zombie apocalypse adventure.</p>
+<a class="watch-btn" href="movie.html">Watch</a>
+</div>
+</div>
+
+<!-- MOVIE 2 -->
+<div class="movie-card">
+<img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=1200&auto=format&fit=crop">
+<div class="movie-info">
+<h2>Galaxy Mission</h2>
+<p>A dangerous mission in deep space.</p>
+<a class="watch-btn" href="movie1.html">Watch</a>
+</div>
+</div> 
+
+<!-- MOVIE 3 -->
+<div class="movie-card">
+<img src="https://images.unsplash.com/photo-1513106580091-1d82408b8cd6?q=80&w=1200&auto=format&fit=crop">
+<div class="movie-info">
+<h2>The Final Night</h2>
+<p>A mysterious night full of survival challenges.</p>
+<a class="watch-btn" href="movie2.html">Watch</a>
+</div>
+</div>
+
+</section>
+
+<footer>
+© 2026 Movie Hub | All Movies
+</footer>
+
+</body>
+</html>
