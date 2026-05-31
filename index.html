@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie Hub</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#0b0b0f;
+    color:white;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+nav{
+    width:100%;
+    height:80px;
+    background:rgba(0,0,0,0.7);
+    backdrop-filter:blur(10px);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 50px;
+    position:fixed;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+    font-size:35px;
+    font-weight:bold;
+    color:#ff3131;
+    text-shadow:0 0 20px #ff3131;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:#ff3131;
+}
+
+/* HERO */
+
+.hero{
+    height:100vh;
+    background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+    url("https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1600&auto=format&fit=crop");
+    background-size:cover;
+    background-position:center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+.hero-content h1{
+    font-size:80px;
+    margin-bottom:20px;
+    animation:glow 2s infinite alternate;
+}
+
+.hero-content p{
+    font-size:24px;
+    margin-bottom:30px;
+    color:#cccccc;
+}
+
+.hero-content button{
+    padding:15px 40px;
+    font-size:20px;
+    border:none;
+    border-radius:50px;
+    background:#ff3131;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+    box-shadow:0 0 20px #ff3131;
+}
+
+.hero-content button:hover{
+    transform:scale(1.1);
+    background:#ff5555;
+}
+
+/* MOVIE SECTION */
+
+.movies{
+    padding:120px 50px;
+}
+
+.movies h2{
+    font-size:50px;
+    margin-bottom:40px;
+    text-align:center;
+}
+
+.movie-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.movie-card{
+    background:#16161d;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.3s;
+    box-shadow:0 0 20px rgba(255,49,49,0.1);
+}
+
+.movie-card:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 0 30px rgba(255,49,49,0.5);
+}
+
+.movie-card img{
+    width:100%;
+    height:350px;
+    object-fit:cover;
+}
+
+.movie-info{
+    padding:20px;
+}
+
+.movie-info h3{
+    margin-bottom:10px;
+    font-size:28px;
+}
+
+.movie-info p{
+    color:#bbbbbb;
+    margin-bottom:15px;
+}
+
+.watch-btn{
+    display:inline-block;
+    padding:10px 20px;
+    background:#ff3131;
+    border-radius:30px;
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+}
+
+.watch-btn:hover{
+    background:#ff5555;
+}
+
+/* FOOTER */
+
+footer{
+    background:#111;
+    padding:30px;
+    text-align:center;
+    color:#777;
+}
+
+/* ANIMATION */
+
+@keyframes glow{
+    from{
+        text-shadow:0 0 10px #ff3131;
+    }
+    to{
+        text-shadow:
+        0 0 20px #ff3131,
+        0 0 40px #ff3131,
+        0 0 60px #ff3131;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+    <div class="logo">MOVIE HUB</div>
+
+    <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="movies.html">Movies</a></li>
+        <li><a href="upload.html">Upload</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="chatbot.html">Vault ai</a></li>
+    </ul>
+</nav>
+
+<section class="hero">
+
+<div class="hero-content">
+    <h1>CREATE. WATCH. SHARE.</h1>
+
+    <p>A website where friends upload awesome movies.</p>
+
+    <button>WATCH NOW</button>
+</div>
+
+</section>
+
+<section class="movies">
+
+<h2>Featured Movies</h2>
+
+<div class="movie-grid">
+
+<div class="movie-card">
+<img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=1200&auto=format&fit=crop">
+
+<div class="movie-info">
+<h3>Zombie Escape</h3>
+
+<p>A group survives the apocalypse.</p>
+
+<a class="watch-btn" href="movie.html">Watch</a>
+</div>
+</div>
+
+<div class="movie-card">
+<img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?q=80&w=1200&auto=format&fit=crop">
+
+<div class="movie-info">
+<h3>Space Mission</h3>
+
+<p>An adventure beyond Earth.</p>
+
+<a class="watch-btn" href="movie1.html">Watch</a>
+</div>
+</div>
+
+<div class="movie-card">
+<img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=1200&auto=format&fit=crop">
+
+<div class="movie-info">
+<h3>The Mystery</h3>
+
+<p>A strange story unfolds at night.</p>
+
+<a class="watch-btn" href="movie2.html">Watch</a>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+    © 2026 Movie Hub | Made By Friends
+</footer>
+
+</body>
+</html>
