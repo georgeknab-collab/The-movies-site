@@ -217,7 +217,7 @@ header {
 
 .stats {
 
-    max-width: 1000px;
+    max-width: 900px;
 
     margin: 0 auto 60px;
 
@@ -275,7 +275,7 @@ header {
 
 .container {
 
-    max-width: 1100px;
+    max-width: 900px;
 
     margin: auto;
 
@@ -296,14 +296,14 @@ header {
 
 
 /* =========================
-   ACHIEVEMENTS
+   ACHIEVEMENT CARD
 ========================= */
 
 .achievements {
 
     display: grid;
 
-    grid-template-columns: repeat(2,1fr);
+    grid-template-columns: 1fr;
 
     gap: 20px;
 
@@ -318,7 +318,7 @@ header {
 
     border-radius: 20px;
 
-    padding: 25px;
+    padding: 30px;
 
     display: flex;
 
@@ -350,11 +350,11 @@ header {
 
 .icon {
 
-    min-width: 70px;
+    min-width: 80px;
 
-    height: 70px;
+    height: 80px;
 
-    border-radius: 18px;
+    border-radius: 20px;
 
     background: #191919;
 
@@ -366,7 +366,7 @@ header {
 
     align-items: center;
 
-    font-size: 32px;
+    font-size: 38px;
 
 }
 
@@ -384,9 +384,9 @@ header {
 
 .info h3 {
 
-    font-size: 19px;
+    font-size: 24px;
 
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 
 }
 
@@ -395,11 +395,11 @@ header {
 
     color: var(--muted);
 
-    font-size: 13px;
+    font-size: 14px;
 
     line-height: 1.5;
 
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 
 }
 
@@ -410,7 +410,7 @@ header {
 
 .progress {
 
-    height: 6px;
+    height: 7px;
 
     background: #222;
 
@@ -438,9 +438,9 @@ header {
 
     color: var(--muted);
 
-    font-size: 11px;
+    font-size: 12px;
 
-    margin-top: 6px;
+    margin-top: 7px;
 
 }
 
@@ -451,7 +451,7 @@ header {
 
 .unlocked {
 
-    border-color: rgba(53,208,127,0.4);
+    border-color: rgba(53,208,127,0.45);
 
 }
 
@@ -476,9 +476,9 @@ header {
 
     position: absolute;
 
-    top: 15px;
+    top: 18px;
 
-    right: 15px;
+    right: 18px;
 
     color: var(--green);
 
@@ -497,7 +497,7 @@ header {
 
 .locked {
 
-    opacity: 0.65;
+    opacity: 0.7;
 
 }
 
@@ -506,11 +506,11 @@ header {
 
     position: absolute;
 
-    top: 15px;
+    top: 18px;
 
-    right: 15px;
+    right: 18px;
 
-    font-size: 13px;
+    font-size: 14px;
 
 }
 
@@ -581,7 +581,7 @@ footer strong {
    MOBILE
 ========================= */
 
-@media(max-width:750px) {
+@media(max-width:700px) {
 
     header {
 
@@ -589,15 +589,24 @@ footer strong {
 
     }
 
+
     .stats {
 
         grid-template-columns: 1fr;
 
     }
 
-    .achievements {
 
-        grid-template-columns: 1fr;
+    .achievement {
+
+        padding: 22px;
+
+    }
+
+
+    .info h3 {
+
+        font-size: 20px;
 
     }
 
@@ -653,9 +662,8 @@ footer strong {
 
         <p>
 
-            Explore George's Universe,
-            discover secrets, watch movies,
-            and unlock special achievements.
+            Watch movies and unlock
+            achievements across George's Universe.
 
         </p>
 
@@ -698,13 +706,13 @@ footer strong {
             id="totalCount"
         >
 
-            0
+            1
 
         </div>
 
         <div class="stat-label">
 
-            Total Achievements
+            Total Achievement
 
         </div>
 
@@ -735,15 +743,14 @@ footer strong {
 
 
 <!-- =========================
-     ACHIEVEMENTS
+     ACHIEVEMENT
 ========================= -->
 
 <main class="container">
 
-
     <h2 class="section-title">
 
-        YOUR ACHIEVEMENTS
+        YOUR ACHIEVEMENT
 
     </h2>
 
@@ -762,7 +769,6 @@ footer strong {
         Reset Achievement Progress
 
     </button>
-
 
 </main>
 
@@ -810,228 +816,151 @@ function displayAchievements() {
     container.innerHTML = "";
 
 
-    const achievementList =
-        Object.entries(
-            ACHIEVEMENTS
+    const achievement =
+        ACHIEVEMENTS.firstMovie;
+
+
+    const unlocked =
+        data.unlocked.includes(
+            "firstMovie"
         );
 
 
-    /* STATS */
+    let progress = 0;
 
-    document.getElementById(
-        "totalCount"
-    ).textContent =
-        achievementList.length;
 
+    let progressText =
+        "0 / 1";
+
+
+    if (
+        data.moviesWatched >= 1
+    ) {
+
+        progress = 100;
+
+        progressText = "1 / 1";
+
+    }
+
+
+    /* UPDATE STATS */
 
     document.getElementById(
         "unlockedCount"
     ).textContent =
-        data.unlocked.length;
+        unlocked ? "1" : "0";
 
 
-    const percentage =
-        achievementList.length === 0
-
-        ? 0
-
-        :
-
-        Math.round(
-
-            (
-                data.unlocked.length /
-                achievementList.length
-            ) * 100
-
-        );
+    document.getElementById(
+        "totalCount"
+    ).textContent =
+        "1";
 
 
     document.getElementById(
         "percentage"
     ).textContent =
-        percentage + "%";
+        unlocked ? "100%" : "0%";
 
 
-    /* CREATE ACHIEVEMENT CARDS */
+    /* CREATE CARD */
 
-    achievementList.forEach(
-        ([id, achievement]) => {
+    const card =
+        document.createElement(
+            "div"
+        );
 
 
-            const unlocked =
-                data.unlocked.includes(id);
+    card.className =
+        "achievement " +
+        (
+            unlocked
+            ? "unlocked"
+            : "locked"
+        );
 
 
-            let progress = 0;
+    card.innerHTML = `
 
-            let progressText =
-                "0 / 1";
+        <div class="icon">
 
+            ${achievement.icon}
 
-            /* FIRST MOVIE */
+        </div>
 
-            if (
-                id === "firstMovie"
-            ) {
 
-                if (
-                    data.moviesWatched >= 1
-                ) {
+        <div class="info">
 
-                    progress = 100;
+            <h3>
 
-                    progressText =
-                        "1 / 1";
+                ${achievement.name}
 
-                }
+            </h3>
 
-                else {
 
-                    progress = 0;
+            <p>
 
-                    progressText =
-                        "0 / 1";
+                ${achievement.description}
 
-                }
+            </p>
 
-            }
 
+            <div class="progress">
 
-            /* EXPLORER */
+                <div
+                    class="progress-bar"
+                    style="width:${progress}%"
+                ></div>
 
-            else if (
-                id === "explorer"
-            ) {
+            </div>
 
-                progress =
-                    Math.min(
-                        data.pagesVisited.length / 5,
-                        1
-                    ) * 100;
 
+            <div class="progress-text">
 
-                progressText =
-                    Math.min(
-                        data.pagesVisited.length,
-                        5
-                    ) + " / 5";
+                ${progressText}
 
-            }
+            </div>
 
+        </div>
 
-            /* NORMAL ACHIEVEMENTS */
 
-            else if (unlocked) {
+        ${
+            unlocked
 
-                progress = 100;
+            ?
 
-                progressText =
-                    "1 / 1";
+            `
+            <div class="badge">
 
-            }
+                UNLOCKED
 
+            </div>
+            `
 
-            /* CREATE CARD */
+            :
 
-            const card =
-                document.createElement(
-                    "div"
-                );
+            `
+            <div class="lock">
 
+                🔒
 
-            card.className =
-                "achievement " +
-                (
-                    unlocked
-                    ? "unlocked"
-                    : "locked"
-                );
-
-
-            card.innerHTML = `
-
-                <div class="icon">
-
-                    ${achievement.icon}
-
-                </div>
-
-
-                <div class="info">
-
-                    <h3>
-
-                        ${achievement.name}
-
-                    </h3>
-
-
-                    <p>
-
-                        ${achievement.description}
-
-                    </p>
-
-
-                    <div class="progress">
-
-                        <div
-                            class="progress-bar"
-                            style="width:${progress}%"
-                        ></div>
-
-                    </div>
-
-
-                    <div class="progress-text">
-
-                        ${progressText}
-
-                    </div>
-
-                </div>
-
-
-                ${
-                    unlocked
-
-                    ?
-
-                    `
-                    <div class="badge">
-
-                        UNLOCKED
-
-                    </div>
-                    `
-
-                    :
-
-                    `
-                    <div class="lock">
-
-                        🔒
-
-                    </div>
-                    `
-                }
-
-            `;
-
-
-            container.appendChild(
-                card
-            );
-
+            </div>
+            `
         }
+
+    `;
+
+
+    container.appendChild(
+        card
     );
 
 }
 
 
 /* =========================
-   RESET ACHIEVEMENTS
+   RESET
 ========================= */
 
 function resetAchievements() {
@@ -1039,7 +968,7 @@ function resetAchievements() {
 
     const answer =
         confirm(
-            "Are you sure you want to reset all achievement progress?"
+            "Are you sure you want to reset your achievement?"
         );
 
 
