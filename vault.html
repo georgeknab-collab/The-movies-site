@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VAULT — DarkGamers</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root {
+  --red: #e8271e;
+  --dark-red: #9d1712;
+  --bg: #080808;
+  --surface: #111;
+  --surface2: #151515;
+  --border: rgba(255,255,255,0.08);
+  --text: #f0ede8;
+  --muted: #777;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+
+  padding: 20px 40px;
+
+  border-bottom: 1px solid var(--border);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: rgba(8,8,8,0.85);
+  backdrop-filter: blur(15px);
+}
+
+.logo {
+  font-family: 'Archivo Black', sans-serif;
+  letter-spacing: 5px;
+  font-size: 22px;
+}
+
+.logo span {
+  color: var(--red);
+}
+
+nav {
+  display: flex;
+  gap: 25px;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: var(--red);
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+  min-height: 650px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+
+  padding: 80px 20px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  background: var(--red);
+
+  filter: blur(180px);
+
+  opacity: 0.12;
+
+  border-radius: 50%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.vault {
+  font-family: 'Archivo Black', sans-serif;
+
+  font-size: clamp(65px, 14vw, 150px);
+
+  letter-spacing: 18px;
+
+  line-height: 1;
+
+  text-shadow:
+    0 0 30px rgba(232,39,30,0.15);
+}
+
+.vault span {
+  color: var(--red);
+}
+
+.hero h2 {
+  margin-top: 30px;
+
+  font-size: clamp(25px, 5vw, 45px);
+
+  font-weight: 700;
+
+  letter-spacing: 4px;
+}
+
+.hero p {
+  max-width: 650px;
+
+  margin: 20px auto 35px;
+
+  color: var(--muted);
+
+  line-height: 1.7;
+
+  font-size: 16px;
+}
+
+.button {
+  display: inline-block;
+
+  background: var(--red);
+
+  color: white;
+
+  text-decoration: none;
+
+  padding: 15px 30px;
+
+  border-radius: 999px;
+
+  font-weight: 700;
+
+  transition: 0.25s;
+
+  box-shadow: 0 0 25px rgba(232,39,30,0.25);
+}
+
+.button:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 0 40px rgba(232,39,30,0.5);
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.container {
+  max-width: 1100px;
+
+  margin: auto;
+
+  padding: 90px 25px;
+}
+
+.section-title {
+  font-family: 'Archivo Black', sans-serif;
+
+  font-size: 40px;
+
+  margin-bottom: 12px;
+}
+
+.section-subtitle {
+  color: var(--muted);
+
+  margin-bottom: 40px;
+
+  font-size: 15px;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 25px;
+}
+
+.card {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  transition: 0.25s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(232,39,30,0.4);
+
+  box-shadow: 0 15px 40px rgba(0,0,0,0.35);
+}
+
+.card h3 {
+  font-size: 22px;
+
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: var(--muted);
+
+  line-height: 1.7;
+
+  font-size: 14px;
+}
+
+/* =========================
+   DARKGAMERS
+========================= */
+
+.darkgamers {
+  margin-top: 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(232,39,30,0.12),
+      rgba(0,0,0,0)
+    ),
+    var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 25px;
+
+  padding: 45px;
+}
+
+.darkgamers h2 {
+  font-family: 'Archivo Black', sans-serif;
+
+  font-size: 35px;
+
+  margin-bottom: 15px;
+}
+
+.darkgamers h2 span {
+  color: var(--red);
+}
+
+.darkgamers p {
+  max-width: 750px;
+
+  color: var(--muted);
+
+  line-height: 1.8;
+}
+
+/* =========================
+   MEMBERS
+========================= */
+
+.members {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.member {
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 18px;
+
+  padding: 25px;
+
+  text-align: center;
+
+  transition: 0.25s;
+}
+
+.member:hover {
+  transform: translateY(-5px);
+
+  border-color: var(--red);
+}
+
+.avatar {
+  width: 75px;
+  height: 75px;
+
+  margin: 0 auto 18px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      var(--red),
+      var(--dark-red)
+    );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  font-family: 'Archivo Black', sans-serif;
+
+  font-size: 25px;
+
+  box-shadow:
+    0 0 25px rgba(232,39,30,0.25);
+}
+
+.member h3 {
+  margin-bottom: 5px;
+}
+
+.member p {
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+/* =========================
+   PROJECTS
+========================= */
+
+.projects {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, 1fr);
+
+  gap: 20px;
+}
+
+.project {
+  min-height: 220px;
+
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  padding: 30px;
+
+  position: relative;
+
+  overflow: hidden;
+
+  transition: 0.25s;
+}
+
+.project::after {
+  content: "DG";
+
+  position: absolute;
+
+  right: -10px;
+  bottom: -35px;
+
+  font-family: 'Archivo Black';
+
+  font-size: 150px;
+
+  color: rgba(232,39,30,0.035);
+}
+
+.project:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(232,39,30,0.4);
+}
+
+.project h3 {
+  font-size: 25px;
+
+  margin-bottom: 12px;
+}
+
+.project p {
+  color: var(--muted);
+
+  max-width: 600px;
+
+  line-height: 1.7;
+}
+
+/* =========================
+   JOIN
+========================= */
+
+.join {
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(232,39,30,0.1),
+      transparent
+    );
+
+  border: 1px solid var(--border);
+
+  border-radius: 25px;
+
+  padding: 70px 25px;
+}
+
+.join h2 {
+  font-family: 'Archivo Black', sans-serif;
+
+  font-size: 42px;
+
+  margin-bottom: 15px;
+}
+
+.join p {
+  color: var(--muted);
+
+  max-width: 600px;
+
+  margin: 0 auto 30px;
+
+  line-height: 1.7;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+  border-top: 1px solid var(--border);
+
+  padding: 30px;
+
+  text-align: center;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+footer strong {
+  color: var(--text);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 750px) {
+
+  header {
+    padding: 18px 20px;
+  }
+
+  nav {
+    gap: 12px;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+
+  .about {
+    grid-template-columns: 1fr;
+  }
+
+  .members {
+    grid-template-columns: 1fr;
+  }
+
+  .projects {
+    grid-template-columns: 1fr;
+  }
+
+  .darkgamers {
+    padding: 30px;
+  }
+
+  .vault {
+    letter-spacing: 7px;
+  }
+
+  .section-title {
+    font-size: 32px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+  <div class="logo">
+    V<span>A</span>ULT
+  </div>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#members">Members</a>
+    <a href="#projects">Projects</a>
+    <a href="#join">Join</a>
+  </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <div class="vault">
+      V<span>A</span>ULT
+    </div>
+
+    <h2>DARKGAMERS</h2>
+
+    <p>
+      Welcome to the DarkGamers.
+      A creative crew built around movies, projects, and the VAULT community.
+    </p>
+
+    <a class="button" href="#about">
+      ENTER THE DARK
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section id="about">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      THE DARKGAMERS
+    </h2>
+
+    <p class="section-subtitle">
+      Behind the scenes of the VAULT community.
+    </p>
+
+    <div class="about">
+
+      <div class="card">
+
+        <h3>🎮 Gaming</h3>
+
+        <p>
+          DarkGamers are gamers, creators, and
+          community members who enjoy building
+          cool gaming experiences and helping
+          bring new ideas to life.
+        </p>
+
+      </div>
+
+      <div class="card">
+
+        <h3>🎬 Movies</h3>
+
+        <p>
+          The DarkGamers can also help with
+          movie projects, ideas, testing,
+          feedback, and the creative side of
+          the VAULT community.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="darkgamers">
+
+      <h2>
+        WE ARE THE <span>DARK</span>
+      </h2>
+
+      <p>
+        The DarkGamers are part of the VAULT
+        community. We help create, test,
+        support, and improve projects while
+        keeping the community fun.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     MEMBERS
+========================= -->
+
+<section id="members">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      THE CREW
+    </h2>
+
+    <p class="section-subtitle">
+      The people behind the DarkGamers.
+    </p>
+
+    <div class="members">
+
+      <div class="member">
+
+        <div class="avatar">
+          p_l24
+        </div>
+
+        <h3>Pretzel_lover124</h3>
+
+        <p>
+          Community Member
+        </p>
+
+      </div>
+
+
+      <div class="member">
+
+        <div class="avatar">
+          GK
+        </div>
+
+        <h3>George</h3>
+
+        <p>
+          Creator
+        </p>
+
+      </div>
+
+
+      <div class="member">
+
+        <div class="avatar">
+          R_H
+        </div>
+
+        <h3>Rady</h3>
+
+        <p>
+          Project Helper
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PROJECTS
+========================= -->
+
+<section id="projects">
+
+  <div class="container">
+
+    <h2 class="section-title">
+      PROJECTS
+    </h2>
+
+    <p class="section-subtitle">
+      What the DarkGamers work on.
+    </p>
+
+    <div class="projects">
+
+      <div class="project">
+
+        <h3>🎬 VAULT Movies</h3>
+
+        <p>
+          Movie projects and creative ideas
+          made for the VAULT community.
+        </p>
+
+      </div>
+
+
+      <div class="project">
+
+        <h3>🎮 Gaming Projects</h3>
+
+        <p>
+          Games, experiments, challenges,
+          and gaming-related projects.
+        </p>
+
+      </div>
+
+
+      <div class="project">
+
+        <h3>💻 Web Projects</h3>
+
+        <p>
+          Websites, tools, experiments,
+          and other digital creations.
+        </p>
+
+      </div>
+
+
+      <div class="project">
+
+        <h3>🔥 Community</h3>
+
+        <p>
+          Helping the VAULT community grow
+          through ideas, feedback, and teamwork.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     JOIN
+========================= -->
+
+<section id="join">
+
+  <div class="container">
+
+    <div class="join">
+
+      <h2>
+        ENTER THE DARK
+      </h2>
+
+      <p>
+        Want to be part of the DarkGamers
+        community? Keep creating, gaming,
+        helping others, and having fun.
+      </p>
+
+      <a class="button" href="contact.html">
+        CONTACT VAULT
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+  <strong>VAULT</strong> —
+  DarkGamers Community
+
+  <br><br>
+
+  © 2026 VAULT. All rights reserved.
+
+</footer>
+
+
+</body>
+</html>
