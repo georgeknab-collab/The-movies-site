@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VAULT — Achievements</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+
+<style>
+
+/* =========================
+   VARIABLES
+========================= */
+
+:root {
+
+    --red:#e8271e;
+
+    --bg:#080808;
+
+    --surface:#111;
+
+    --surface2:#151515;
+
+    --border:rgba(255,255,255,0.08);
+
+    --text:#f0ede8;
+
+    --muted:#777;
+
+    --green:#35d07f;
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+* {
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+
+body {
+
+    font-family:'DM Sans',sans-serif;
+
+    background:var(--bg);
+
+    color:var(--text);
+
+    min-height:100vh;
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+
+    height:80px;
+
+    padding:0 40px;
+
+    border-bottom:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    background:rgba(8,8,8,0.9);
+
+    backdrop-filter:blur(12px);
+
+}
+
+
+.logo {
+
+    font-family:'Archivo Black',sans-serif;
+
+    font-size:22px;
+
+    letter-spacing:5px;
+
+}
+
+
+.logo span {
+
+    color:var(--red);
+
+}
+
+
+.back {
+
+    color:var(--muted);
+
+    text-decoration:none;
+
+    transition:0.2s;
+
+}
+
+
+.back:hover {
+
+    color:var(--red);
+
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+
+    text-align:center;
+
+    padding:80px 20px 50px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+.hero::before {
+
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+
+    height:450px;
+
+    background:var(--red);
+
+    filter:blur(180px);
+
+    opacity:0.1;
+
+    border-radius:50%;
+
+    left:50%;
+
+    top:-200px;
+
+    transform:translateX(-50%);
+
+}
+
+
+.hero-content {
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+
+.hero h1 {
+
+    font-family:'Archivo Black',sans-serif;
+
+    font-size:clamp(45px,8vw,85px);
+
+    letter-spacing:4px;
+
+}
+
+
+.hero h1 span {
+
+    color:var(--red);
+
+}
+
+
+.hero p {
+
+    max-width:650px;
+
+    margin:20px auto 0;
+
+    color:var(--muted);
+
+    line-height:1.7;
+
+}
+
+
+/* =========================
+   STATS
+========================= */
+
+.stats {
+
+    max-width:1000px;
+
+    margin:0 auto 60px;
+
+    padding:0 20px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+}
+
+
+.stat {
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+
+.stat-number {
+
+    font-family:'Archivo Black',sans-serif;
+
+    font-size:36px;
+
+    color:var(--red);
+
+}
+
+
+.stat-label {
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    margin-top:5px;
+
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.container {
+
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:0 20px 80px;
+
+}
+
+
+.section-title {
+
+    font-family:'Archivo Black',sans-serif;
+
+    font-size:32px;
+
+    margin-bottom:25px;
+
+}
+
+
+/* =========================
+   ACHIEVEMENTS
+========================= */
+
+.achievements {
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+
+.achievement {
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:center;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:0.25s;
+
+}
+
+
+.achievement:hover {
+
+    transform:translateY(-4px);
+
+    border-color:rgba(232,39,30,0.4);
+
+}
+
+
+/* ICON */
+
+.icon {
+
+    min-width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    background:#191919;
+
+    border:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:32px;
+
+}
+
+
+/* INFO */
+
+.info {
+
+    flex:1;
+
+}
+
+
+.info h3 {
+
+    font-size:19px;
+
+    margin-bottom:6px;
+
+}
+
+
+.info p {
+
+    color:var(--muted);
+
+    font-size:13px;
+
+    line-height:1.5;
+
+    margin-bottom:12px;
+
+}
+
+
+/* PROGRESS */
+
+.progress {
+
+    height:6px;
+
+    background:#222;
+
+    border-radius:999px;
+
+    overflow:hidden;
+
+}
+
+
+.progress-bar {
+
+    height:100%;
+
+    background:var(--red);
+
+    border-radius:999px;
+
+    transition:0.5s;
+
+}
+
+
+.progress-text {
+
+    color:var(--muted);
+
+    font-size:11px;
+
+    margin-top:6px;
+
+}
+
+
+/* =========================
+   UNLOCKED
+========================= */
+
+.unlocked {
+
+    border-color:rgba(53,208,127,0.4);
+
+}
+
+
+.unlocked .icon {
+
+    background:rgba(53,208,127,0.1);
+
+    border-color:rgba(53,208,127,0.3);
+
+}
+
+
+.unlocked .progress-bar {
+
+    background:var(--green);
+
+}
+
+
+.badge {
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    color:var(--green);
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+}
+
+
+/* =========================
+   LOCKED
+========================= */
+
+.locked {
+
+    opacity:0.65;
+
+}
+
+
+.lock {
+
+    position:absolute;
+
+    top:15px;
+
+    right:15px;
+
+    font-size:13px;
+
+}
+
+
+/* =========================
+   RESET BUTTON
+========================= */
+
+.reset {
+
+    display:block;
+
+    margin:40px auto 0;
+
+    padding:12px 22px;
+
+    border:1px solid var(--border);
+
+    background:#111;
+
+    color:var(--muted);
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+    transition:0.2s;
+
+}
+
+
+.reset:hover {
+
+    color:white;
+
+    border-color:var(--red);
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    border-top:1px solid var(--border);
+
+    padding:30px;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    font-size:13px;
+
+}
+
+
+footer strong {
+
+    color:white;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:750px) {
+
+    header {
+
+        padding:0 20px;
+
+    }
+
+
+    .stats {
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .achievements {
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+
+        V<span>A</span>ULT
+
+    </div>
+
+
+    <a
+        class="back"
+        href="index.html"
+    >
+
+        ← Back to Library
+
+    </a>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+
+            ACHIEVE<span>MENTS</span>
+
+        </h1>
+
+
+        <p>
+
+            Watch movies, play games,
+            explore George's Universe,
+            and unlock achievements.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STATS
+========================= -->
+
+<section class="stats">
+
+
+    <div class="stat">
+
+        <div
+            class="stat-number"
+            id="unlockedCount"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+
+            Unlocked
+
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div
+            class="stat-number"
+            id="totalCount"
+        >
+            0
+        </div>
+
+        <div class="stat-label">
+
+            Total Achievements
+
+        </div>
+
+    </div>
+
+
+    <div class="stat">
+
+        <div
+            class="stat-number"
+            id="percentage"
+        >
+            0%
+        </div>
+
+        <div class="stat-label">
+
+            Completion
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =========================
+     ACHIEVEMENTS
+========================= -->
+
+<main class="container">
+
+    <h2 class="section-title">
+
+        YOUR ACHIEVEMENTS
+
+    </h2>
+
+
+    <div
+        class="achievements"
+        id="achievements"
+    ></div>
+
+
+    <button
+        class="reset"
+        onclick="resetAchievements()"
+    >
+
+        Reset Achievement Progress
+
+    </button>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong>VAULT</strong>
+    —
+    George's Universe
+
+    <br><br>
+
+    © 2026 George's Universe
+
+</footer>
+
+
+<!-- =========================
+     ACHIEVEMENT SYSTEM
+========================= -->
+
+<script src="achievements.js"></script>
+
+
+<script>
+
+
+/* =========================
+   DISPLAY ACHIEVEMENTS
+========================= */
+
+function displayAchievements() {
+
+
+    const data = getAchievementData();
+
+
+    const container =
+        document.getElementById(
+            "achievements"
+        );
+
+
+    container.innerHTML = "";
+
+
+    const achievementList =
+        Object.entries(ACHIEVEMENTS);
+
+
+    document.getElementById(
+        "totalCount"
+    ).textContent =
+        achievementList.length;
+
+
+    document.getElementById(
+        "unlockedCount"
+    ).textContent =
+        data.unlocked.length;
+
+
+    const percentage =
+        achievementList.length === 0
+
+        ? 0
+
+        :
+
+        Math.round(
+            (data.unlocked.length /
+            achievementList.length) * 100
+        );
+
+
+    document.getElementById(
+        "percentage"
+    ).textContent =
+        percentage + "%";
+
+
+    achievementList.forEach(
+        ([id, achievement]) => {
+
+
+            const unlocked =
+                data.unlocked.includes(id);
+
+
+            let progress = 0;
+
+            let progressText = "0 / 1";
+
+
+            /* MOVIES */
+
+            if (id === "movieMarathon") {
+
+                progress =
+                    Math.min(
+                        data.moviesWatched / 5,
+                        1
+                    ) * 100;
+
+                progressText =
+                    data.moviesWatched + " / 5";
+
+            }
+
+
+            /* GAMES */
+
+            else if (id === "gamer") {
+
+                progress =
+                    Math.min(
+                        data.gamesPlayed / 5,
+                        1
+                    ) * 100;
+
+                progressText =
+                    data.gamesPlayed + " / 5";
+
+            }
+
+
+            /* EXPLORER */
+
+            else if (id === "explorer") {
+
+                progress =
+                    Math.min(
+                        data.pagesVisited.length / 10,
+                        1
+                    ) * 100;
+
+                progressText =
+                    data.pagesVisited.length +
+                    " / 10";
+
+            }
+
+
+            /* NORMAL ACHIEVEMENT */
+
+            else if (unlocked) {
+
+                progress = 100;
+
+                progressText = "1 / 1";
+
+            }
+
+
+            /* CREATE CARD */
+
+            const card =
+                document.createElement("div");
+
+
+            card.className =
+                "achievement " +
+                (unlocked
+                    ? "unlocked"
+                    : "locked");
+
+
+            card.innerHTML = `
+
+                <div class="icon">
+
+                    ${achievement.icon}
+
+                </div>
+
+
+                <div class="info">
+
+                    <h3>
+
+                        ${achievement.name}
+
+                    </h3>
+
+
+                    <p>
+
+                        ${achievement.description}
+
+                    </p>
+
+
+                    <div class="progress">
+
+                        <div
+                            class="progress-bar"
+                            style="width:${progress}%"
+                        ></div>
+
+                    </div>
+
+
+                    <div class="progress-text">
+
+                        ${progressText}
+
+                    </div>
+
+                </div>
+
+
+                ${
+                    unlocked
+
+                    ?
+
+                    `<div class="badge">
+                        UNLOCKED
+                    </div>`
+
+                    :
+
+                    `<div class="lock">
+                        🔒
+                    </div>`
+                }
+
+            `;
+
+
+            container.appendChild(card);
+
+        }
+    );
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetAchievements() {
+
+
+    const answer =
+        confirm(
+            "Are you sure you want to reset all achievements?"
+        );
+
+
+    if (!answer) return;
+
+
+    localStorage.removeItem(
+        "georgesUniverseAchievements"
+    );
+
+
+    location.reload();
+
+}
+
+
+/* =========================
+   START
+========================= */
+
+displayAchievements();
+
+
+</script>
+
+
+</body>
+
+</html>
