@@ -1,1004 +1,334 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VAULT — Achievements</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link
-href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@300;400;500;700&display=swap"
-rel="stylesheet"
->
-
-<style>
-
-/* =========================
-   VARIABLES
-========================= */
-
-:root {
-
-    --red: #e8271e;
-    --bg: #080808;
-    --surface: #111;
-    --border: rgba(255,255,255,0.08);
-    --text: #f0ede8;
-    --muted: #777;
-    --green: #35d07f;
-
-}
-
-
-/* =========================
-   RESET
-========================= */
-
-* {
-
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-
-}
-
-
-body {
-
-    font-family: 'DM Sans', sans-serif;
-
-    background: var(--bg);
-
-    color: var(--text);
-
-    min-height: 100vh;
-
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-header {
-
-    height: 80px;
-
-    padding: 0 40px;
-
-    border-bottom: 1px solid var(--border);
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 100;
-
-    background: rgba(8,8,8,0.9);
-
-    backdrop-filter: blur(12px);
-
-}
-
-
-.logo {
-
-    font-family: 'Archivo Black', sans-serif;
-
-    font-size: 22px;
-
-    letter-spacing: 5px;
-
-}
-
-
-.logo span {
-
-    color: var(--red);
-
-}
-
-
-.back {
-
-    color: var(--muted);
-
-    text-decoration: none;
-
-    transition: 0.2s;
-
-}
-
-
-.back:hover {
-
-    color: var(--red);
-
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-
-    text-align: center;
-
-    padding: 80px 20px 50px;
-
-    position: relative;
-
-    overflow: hidden;
-
-}
-
-
-.hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    width: 450px;
-
-    height: 450px;
-
-    background: var(--red);
-
-    filter: blur(180px);
-
-    opacity: 0.1;
-
-    border-radius: 50%;
-
-    left: 50%;
-
-    top: -200px;
-
-    transform: translateX(-50%);
-
-}
-
-
-.hero-content {
-
-    position: relative;
-
-    z-index: 2;
-
-}
-
-
-.hero h1 {
-
-    font-family: 'Archivo Black', sans-serif;
-
-    font-size: clamp(45px, 8vw, 85px);
-
-    letter-spacing: 4px;
-
-}
-
-
-.hero h1 span {
-
-    color: var(--red);
-
-}
-
-
-.hero p {
-
-    max-width: 650px;
-
-    margin: 20px auto 0;
-
-    color: var(--muted);
-
-    line-height: 1.7;
-
-}
-
-
-/* =========================
-   STATS
-========================= */
-
-.stats {
-
-    max-width: 900px;
-
-    margin: 0 auto 60px;
-
-    padding: 0 20px;
-
-    display: grid;
-
-    grid-template-columns: repeat(3,1fr);
-
-    gap: 20px;
-
-}
-
-
-.stat {
-
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: 18px;
-
-    padding: 25px;
-
-    text-align: center;
-
-}
-
-
-.stat-number {
-
-    font-family: 'Archivo Black', sans-serif;
-
-    font-size: 36px;
-
-    color: var(--red);
-
-}
-
-
-.stat-label {
-
-    color: var(--muted);
-
-    font-size: 13px;
-
-    margin-top: 5px;
-
-}
-
-
-/* =========================
-   CONTENT
-========================= */
-
-.container {
-
-    max-width: 900px;
-
-    margin: auto;
-
-    padding: 0 20px 80px;
-
-}
-
-
-.section-title {
-
-    font-family: 'Archivo Black', sans-serif;
-
-    font-size: 32px;
-
-    margin-bottom: 25px;
-
-}
-
-
-/* =========================
-   ACHIEVEMENT CARD
-========================= */
-
-.achievements {
-
-    display: grid;
-
-    grid-template-columns: 1fr;
-
-    gap: 20px;
-
-}
-
-
-.achievement {
-
-    background: var(--surface);
-
-    border: 1px solid var(--border);
-
-    border-radius: 20px;
-
-    padding: 30px;
-
-    display: flex;
-
-    gap: 20px;
-
-    align-items: center;
-
-    position: relative;
-
-    overflow: hidden;
-
-    transition: 0.25s;
-
-}
-
-
-.achievement:hover {
-
-    transform: translateY(-4px);
-
-    border-color: rgba(232,39,30,0.4);
-
-}
-
-
-/* =========================
-   ICON
-========================= */
-
-.icon {
-
-    min-width: 80px;
-
-    height: 80px;
-
-    border-radius: 20px;
-
-    background: #191919;
-
-    border: 1px solid var(--border);
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    font-size: 38px;
-
-}
-
-
-/* =========================
-   INFO
-========================= */
-
-.info {
-
-    flex: 1;
-
-}
-
-
-.info h3 {
-
-    font-size: 24px;
-
-    margin-bottom: 8px;
-
-}
-
-
-.info p {
-
-    color: var(--muted);
-
-    font-size: 14px;
-
-    line-height: 1.5;
-
-    margin-bottom: 15px;
-
-}
-
-
-/* =========================
-   PROGRESS
-========================= */
-
-.progress {
-
-    height: 7px;
-
-    background: #222;
-
-    border-radius: 999px;
-
-    overflow: hidden;
-
-}
-
-
-.progress-bar {
-
-    height: 100%;
-
-    background: var(--red);
-
-    border-radius: 999px;
-
-    transition: 0.5s;
-
-}
-
-
-.progress-text {
-
-    color: var(--muted);
-
-    font-size: 12px;
-
-    margin-top: 7px;
-
-}
-
-
-/* =========================
-   UNLOCKED
-========================= */
-
-.unlocked {
-
-    border-color: rgba(53,208,127,0.45);
-
-}
-
-
-.unlocked .icon {
-
-    background: rgba(53,208,127,0.1);
-
-    border-color: rgba(53,208,127,0.3);
-
-}
-
-
-.unlocked .progress-bar {
-
-    background: var(--green);
-
-}
-
-
-.badge {
-
-    position: absolute;
-
-    top: 18px;
-
-    right: 18px;
-
-    color: var(--green);
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-    letter-spacing: 1px;
-
-}
-
-
-/* =========================
-   LOCKED
-========================= */
-
-.locked {
-
-    opacity: 0.7;
-
-}
-
-
-.lock {
-
-    position: absolute;
-
-    top: 18px;
-
-    right: 18px;
-
-    font-size: 14px;
-
-}
-
-
-/* =========================
-   RESET BUTTON
-========================= */
-
-.reset {
-
-    display: block;
-
-    margin: 40px auto 0;
-
-    padding: 12px 22px;
-
-    border: 1px solid var(--border);
-
-    background: #111;
-
-    color: var(--muted);
-
-    border-radius: 999px;
-
-    cursor: pointer;
-
-    transition: 0.2s;
-
-}
-
-
-.reset:hover {
-
-    color: white;
-
-    border-color: var(--red);
-
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-
-    border-top: 1px solid var(--border);
-
-    padding: 30px;
-
-    text-align: center;
-
-    color: var(--muted);
-
-    font-size: 13px;
-
-}
-
-
-footer strong {
-
-    color: white;
-
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:700px) {
-
-    header {
-
-        padding: 0 20px;
-
+// ======================================
+// GEORGE'S UNIVERSE ACHIEVEMENTS
+// ======================================
+
+const ACHIEVEMENTS = {
+
+    firstMovie: {
+        name: "First Movie",
+        description: "Finish your first movie on George's Universe.",
+        icon: "🎬"
     }
 
-
-    .stats {
-
-        grid-template-columns: 1fr;
-
-    }
+};
 
 
-    .achievement {
+// ======================================
+// RANDOM MESSAGES
+// ======================================
 
-        padding: 22px;
+const RANDOM_MESSAGES = [
 
-    }
+    "🚀 You have entered the unknown.",
+    "👀 Someone is watching... probably.",
+    "🎮 GAME ON!",
+    "🌌 Welcome to the Universe.",
+    "🍿 Time for a movie!",
+    "💻 The computers are thinking.",
+    "🔥 GEORGE'S UNIVERSE IS ON FIRE!",
+    "🧠 Your brain has been upgraded.",
+    "👑 You have discovered absolutely nothing.",
+    "🦆 A random duck has entered the Universe.",
+    "⚡ SYSTEM OVERLOAD!",
+    "🎲 The Universe has rolled the dice.",
+    "🌑 YOU ARE A DARK GAMER."
+
+];
 
 
-    .info h3 {
+// ======================================
+// RANDOM BUTTON
+// ======================================
 
-        font-size: 20px;
+function randomUniverseMessage() {
 
-    }
+    const randomIndex =
+        Math.floor(
+            Math.random() * RANDOM_MESSAGES.length
+        );
+
+    const message =
+        RANDOM_MESSAGES[randomIndex];
+
+    showRandomMessage(message);
 
 }
 
-</style>
 
-</head>
+// ======================================
+// RANDOM MESSAGE POPUP
+// ======================================
 
+function showRandomMessage(message) {
 
-<body>
-
-
-<!-- =========================
-     HEADER
-========================= -->
-
-<header>
-
-    <div class="logo">
-
-        V<span>A</span>ULT
-
-    </div>
-
-
-    <a
-        class="back"
-        href="index.html"
-    >
-
-        ← Back to Library
-
-    </a>
-
-</header>
-
-
-<!-- =========================
-     HERO
-========================= -->
-
-<section class="hero">
-
-    <div class="hero-content">
-
-        <h1>
-
-            ACHIEVE<span>MENTS</span>
-
-        </h1>
-
-
-        <p>
-
-            Watch movies and unlock
-            achievements across George's Universe.
-
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     STATS
-========================= -->
-
-<section class="stats">
-
-
-    <div class="stat">
-
-        <div
-            class="stat-number"
-            id="unlockedCount"
-        >
-
-            0
-
-        </div>
-
-        <div class="stat-label">
-
-            Unlocked
-
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div
-            class="stat-number"
-            id="totalCount"
-        >
-
-            1
-
-        </div>
-
-        <div class="stat-label">
-
-            Total Achievement
-
-        </div>
-
-    </div>
-
-
-    <div class="stat">
-
-        <div
-            class="stat-number"
-            id="percentage"
-        >
-
-            0%
-
-        </div>
-
-        <div class="stat-label">
-
-            Completion
-
-        </div>
-
-    </div>
-
-
-</section>
-
-
-<!-- =========================
-     ACHIEVEMENT
-========================= -->
-
-<main class="container">
-
-    <h2 class="section-title">
-
-        YOUR ACHIEVEMENT
-
-    </h2>
-
-
-    <div
-        class="achievements"
-        id="achievements"
-    ></div>
-
-
-    <button
-        class="reset"
-        onclick="resetAchievements()"
-    >
-
-        Reset Achievement Progress
-
-    </button>
-
-</main>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <strong>VAULT</strong>
-    —
-    George's Universe
-
-    <br><br>
-
-    © 2026 George's Universe
-
-</footer>
-
-
-<!-- =========================
-     ACHIEVEMENT SYSTEM
-========================= -->
-
-<script src="achievements.js"></script>
-
-
-<script>
-
-
-function displayAchievements() {
-
-
-    const data =
-        getAchievementData();
-
-
-    const container =
+    const oldPopup =
         document.getElementById(
-            "achievements"
+            "randomUniversePopup"
         );
 
-
-    container.innerHTML = "";
-
-
-    const achievement =
-        ACHIEVEMENTS.firstMovie;
-
-
-    const unlocked =
-        data.unlocked.includes(
-            "firstMovie"
-        );
-
-
-    let progress = 0;
-
-
-    let progressText =
-        "0 / 1";
-
-
-    if (
-        data.moviesWatched >= 1
-    ) {
-
-        progress = 100;
-
-        progressText = "1 / 1";
-
+    if (oldPopup) {
+        oldPopup.remove();
     }
 
 
-    /* UPDATE STATS */
+    const popup =
+        document.createElement("div");
 
-    document.getElementById(
-        "unlockedCount"
-    ).textContent =
-        unlocked ? "1" : "0";
-
-
-    document.getElementById(
-        "totalCount"
-    ).textContent =
-        "1";
+    popup.id =
+        "randomUniversePopup";
 
 
-    document.getElementById(
-        "percentage"
-    ).textContent =
-        unlocked ? "100%" : "0%";
+    popup.innerHTML = `
 
-
-    /* CREATE CARD */
-
-    const card =
-        document.createElement(
-            "div"
-        );
-
-
-    card.className =
-        "achievement " +
-        (
-            unlocked
-            ? "unlocked"
-            : "locked"
-        );
-
-
-    card.innerHTML = `
-
-        <div class="icon">
-
-            ${achievement.icon}
-
+        <div style="
+            font-size:45px;
+            margin-bottom:10px;
+        ">
+            🎲
         </div>
 
-
-        <div class="info">
-
-            <h3>
-
-                ${achievement.name}
-
-            </h3>
-
-
-            <p>
-
-                ${achievement.description}
-
-            </p>
-
-
-            <div class="progress">
-
-                <div
-                    class="progress-bar"
-                    style="width:${progress}%"
-                ></div>
-
-            </div>
-
-
-            <div class="progress-text">
-
-                ${progressText}
-
-            </div>
-
+        <div style="
+            font-size:20px;
+            font-weight:bold;
+        ">
+            ${message}
         </div>
-
-
-        ${
-            unlocked
-
-            ?
-
-            `
-            <div class="badge">
-
-                UNLOCKED
-
-            </div>
-            `
-
-            :
-
-            `
-            <div class="lock">
-
-                🔒
-
-            </div>
-            `
-        }
 
     `;
 
 
-    container.appendChild(
-        card
-    );
+    popup.style.position = "fixed";
+
+    popup.style.left = "50%";
+
+    popup.style.top = "50%";
+
+    popup.style.transform =
+        "translate(-50%, -50%)";
+
+    popup.style.zIndex = "999999";
+
+    popup.style.background = "#111";
+
+    popup.style.color = "white";
+
+    popup.style.padding = "30px 40px";
+
+    popup.style.borderRadius = "20px";
+
+    popup.style.textAlign = "center";
+
+    popup.style.fontFamily =
+        "Arial, sans-serif";
+
+    popup.style.border =
+        "1px solid rgba(232,39,30,0.6)";
+
+    popup.style.boxShadow =
+        "0 0 60px rgba(232,39,30,0.4)";
+
+    popup.style.maxWidth = "90%";
+
+
+    document.body.appendChild(popup);
+
+
+    setTimeout(() => {
+
+        popup.remove();
+
+    }, 3000);
 
 }
 
 
-/* =========================
-   RESET
-========================= */
+// ======================================
+// GET DATA
+// ======================================
 
-function resetAchievements() {
+function getAchievementData() {
 
-
-    const answer =
-        confirm(
-            "Are you sure you want to reset your achievement?"
+    const saved =
+        localStorage.getItem(
+            "georgesUniverseAchievements"
         );
 
+    if (saved) {
 
-    if (!answer) {
-
-        return;
+        return JSON.parse(saved);
 
     }
 
+    return {
 
-    localStorage.removeItem(
-        "georgesUniverseAchievements"
-    );
+        unlocked: [],
 
+        moviesWatched: 0
 
-    location.reload();
+    };
 
 }
 
 
-/* =========================
-   START
-========================= */
+// ======================================
+// SAVE DATA
+// ======================================
 
-displayAchievements();
+function saveAchievementData(data) {
+
+    localStorage.setItem(
+        "georgesUniverseAchievements",
+        JSON.stringify(data)
+    );
+
+}
 
 
-</script>
+// ======================================
+// UNLOCK ACHIEVEMENT
+// ======================================
+
+function unlockAchievement(id) {
+
+    const data =
+        getAchievementData();
+
+    if (!data.unlocked.includes(id)) {
+
+        data.unlocked.push(id);
+
+        saveAchievementData(data);
+
+        showAchievementPopup(id);
+
+    }
+
+}
 
 
-</body>
+// ======================================
+// MOVIE WATCHED
+// ======================================
 
-</html>
+function movieWatched() {
+
+    const data =
+        getAchievementData();
+
+    data.moviesWatched++;
+
+    saveAchievementData(data);
+
+
+    if (data.moviesWatched >= 1) {
+
+        unlockAchievement("firstMovie");
+
+    }
+
+}
+
+
+// ======================================
+// ACHIEVEMENT POPUP
+// ======================================
+
+function showAchievementPopup(id) {
+
+    const achievement =
+        ACHIEVEMENTS[id];
+
+    if (!achievement) return;
+
+
+    const popup =
+        document.createElement("div");
+
+
+    popup.innerHTML = `
+
+        <div style="
+            font-size:32px;
+        ">
+            ${achievement.icon}
+        </div>
+
+        <div>
+
+            <div style="
+                color:#e8271e;
+                font-size:11px;
+                font-weight:bold;
+                letter-spacing:1px;
+                margin-bottom:4px;
+            ">
+                ACHIEVEMENT UNLOCKED
+            </div>
+
+            <div style="
+                font-size:16px;
+                font-weight:bold;
+            ">
+                ${achievement.name}
+            </div>
+
+        </div>
+
+    `;
+
+
+    popup.style.position =
+        "fixed";
+
+    popup.style.right =
+        "25px";
+
+    popup.style.bottom =
+        "25px";
+
+    popup.style.zIndex =
+        "999999";
+
+    popup.style.background =
+        "#111";
+
+    popup.style.color =
+        "white";
+
+    popup.style.padding =
+        "18px 22px";
+
+    popup.style.borderRadius =
+        "15px";
+
+    popup.style.border =
+        "1px solid rgba(232,39,30,0.5)";
+
+    popup.style.boxShadow =
+        "0 0 35px rgba(232,39,30,0.35)";
+
+    popup.style.display =
+        "flex";
+
+    popup.style.alignItems =
+        "center";
+
+    popup.style.gap =
+        "15px";
+
+    popup.style.fontFamily =
+        "Arial, sans-serif";
+
+
+    document.body.appendChild(
+        popup
+    );
+
+
+    setTimeout(() => {
+
+        popup.remove();
+
+    }, 4000);
+
+}
