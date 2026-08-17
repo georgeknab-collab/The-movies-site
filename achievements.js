@@ -8,45 +8,138 @@ const ACHIEVEMENTS = {
         name: "First Movie",
         description: "Finish your first movie on George's Universe.",
         icon: "🎬"
-    },
-
-    darkGamer: {
-        name: "Enter the Dark",
-        description: "Visit the DarkGamers headquarters.",
-        icon: "🌑"
-    },
-
-    firstGame: {
-        name: "First Game",
-        description: "Play your first game.",
-        icon: "🎮"
-    },
-
-    explorer: {
-        name: "Universe Explorer",
-        description: "Visit 5 different sections of George's Universe.",
-        icon: "🌌"
-    },
-
-    creator: {
-        name: "Creator",
-        description: "Create your first project.",
-        icon: "💻"
-    },
-
-    supporter: {
-        name: "Supporter",
-        description: "Favorite your first movie or game.",
-        icon: "❤️"
-    },
-
-    vaultLegend: {
-        name: "VAULT Legend",
-        description: "Unlock every other achievement.",
-        icon: "👑"
     }
 
 };
+
+
+// ======================================
+// RANDOM MESSAGES
+// ======================================
+
+const RANDOM_MESSAGES = [
+
+    "🚀 You have entered the unknown.",
+    "👀 Someone is watching... probably.",
+    "🎮 GAME ON!",
+    "🌌 Welcome to the Universe.",
+    "🍿 Time for a movie!",
+    "💻 The computers are thinking.",
+    "🔥 GEORGE'S UNIVERSE IS ON FIRE!",
+    "🧠 Your brain has been upgraded.",
+    "👑 You have discovered absolutely nothing.",
+    "🦆 A random duck has entered the Universe.",
+    "⚡ SYSTEM OVERLOAD!",
+    "🎲 The Universe has rolled the dice.",
+    "🌑 YOU ARE A DARK GAMER."
+
+];
+
+
+// ======================================
+// RANDOM BUTTON
+// ======================================
+
+function randomUniverseMessage() {
+
+    const randomIndex =
+        Math.floor(
+            Math.random() * RANDOM_MESSAGES.length
+        );
+
+    const message =
+        RANDOM_MESSAGES[randomIndex];
+
+    showRandomMessage(message);
+
+}
+
+
+// ======================================
+// RANDOM MESSAGE POPUP
+// ======================================
+
+function showRandomMessage(message) {
+
+    const oldPopup =
+        document.getElementById(
+            "randomUniversePopup"
+        );
+
+    if (oldPopup) {
+        oldPopup.remove();
+    }
+
+
+    const popup =
+        document.createElement("div");
+
+    popup.id =
+        "randomUniversePopup";
+
+
+    popup.innerHTML = `
+
+        <div style="
+            font-size:45px;
+            margin-bottom:10px;
+        ">
+            🎲
+        </div>
+
+        <div style="
+            font-size:20px;
+            font-weight:bold;
+        ">
+            ${message}
+        </div>
+
+    `;
+
+
+    popup.style.position = "fixed";
+
+    popup.style.left = "50%";
+
+    popup.style.top = "50%";
+
+    popup.style.transform =
+        "translate(-50%, -50%)";
+
+    popup.style.zIndex = "999999";
+
+    popup.style.background = "#111";
+
+    popup.style.color = "white";
+
+    popup.style.padding = "30px 40px";
+
+    popup.style.borderRadius = "20px";
+
+    popup.style.textAlign = "center";
+
+    popup.style.fontFamily =
+        "Arial, sans-serif";
+
+    popup.style.border =
+        "1px solid rgba(232,39,30,0.6)";
+
+    popup.style.boxShadow =
+        "0 0 60px rgba(232,39,30,0.4)";
+
+    popup.style.maxWidth = "90%";
+
+
+    document.body.appendChild(popup);
+
+
+    setTimeout(() => {
+
+        popup.remove();
+
+    }, 3000);
+
+}
 
 
 // ======================================
@@ -70,11 +163,7 @@ function getAchievementData() {
 
         unlocked: [],
 
-        moviesWatched: 0,
-
-        gamesPlayed: 0,
-
-        pagesVisited: []
+        moviesWatched: 0
 
     };
 
@@ -88,18 +177,15 @@ function getAchievementData() {
 function saveAchievementData(data) {
 
     localStorage.setItem(
-
         "georgesUniverseAchievements",
-
         JSON.stringify(data)
-
     );
 
 }
 
 
 // ======================================
-// UNLOCK
+// UNLOCK ACHIEVEMENT
 // ======================================
 
 function unlockAchievement(id) {
@@ -133,7 +219,7 @@ function movieWatched() {
 
     saveAchievementData(data);
 
-    // First movie achievement
+
     if (data.moviesWatched >= 1) {
 
         unlockAchievement("firstMovie");
@@ -144,92 +230,7 @@ function movieWatched() {
 
 
 // ======================================
-// GAME PLAYED
-// ======================================
-
-function gamePlayed() {
-
-    const data =
-        getAchievementData();
-
-    data.gamesPlayed++;
-
-    saveAchievementData(data);
-
-    if (data.gamesPlayed >= 1) {
-
-        unlockAchievement("firstGame");
-
-    }
-
-}
-
-
-// ======================================
-// PAGE TRACKING
-// ======================================
-
-function trackPage() {
-
-    const data =
-        getAchievementData();
-
-    const page =
-        location.pathname;
-
-    if (!data.pagesVisited.includes(page)) {
-
-        data.pagesVisited.push(page);
-
-    }
-
-    saveAchievementData(data);
-
-
-    // 5 different pages
-    if (data.pagesVisited.length >= 5) {
-
-        unlockAchievement("explorer");
-
-    }
-
-
-    // DarkGamers headquarters
-    if (
-        page.includes("darkgamers")
-    ) {
-
-        unlockAchievement("darkGamer");
-
-    }
-
-}
-
-
-// ======================================
-// CREATOR
-// ======================================
-
-function becameCreator() {
-
-    unlockAchievement("creator");
-
-}
-
-
-// ======================================
-// SUPPORTER
-// ======================================
-
-function becameSupporter() {
-
-    unlockAchievement("supporter");
-
-}
-
-
-// ======================================
-// POPUP
+// ACHIEVEMENT POPUP
 // ======================================
 
 function showAchievementPopup(id) {
@@ -331,10 +332,3 @@ function showAchievementPopup(id) {
     }, 4000);
 
 }
-
-
-// ======================================
-// START TRACKING
-// ======================================
-
-trackPage();
