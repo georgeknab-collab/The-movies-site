@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>The Magical World - Movie Hub</title>
 
 <style>
@@ -24,31 +27,44 @@ body{
 nav{
     width:100%;
     height:80px;
+
     position:fixed;
     top:0;
     left:0;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
+
     padding:0 50px;
+
     background:rgba(0,0,0,0.7);
+
     backdrop-filter:blur(10px);
+
     z-index:1000;
 }
 
 .logo{
     font-size:35px;
     font-weight:bold;
+
     color:#ff3131;
+
     text-shadow:0 0 20px #ff3131;
 }
 
 nav a{
     color:white;
+
     text-decoration:none;
+
     padding:10px 20px;
+
     border-radius:30px;
+
     background:#ff3131;
+
     transition:0.3s;
 }
 
@@ -56,112 +72,301 @@ nav a:hover{
     background:#ff5555;
 }
 
+
 /* MOVIE PAGE */
 
 .container{
+
     padding-top:120px;
+
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
+
     text-align:center;
 }
 
 h1{
+
     font-size:60px;
+
     color:#ff3131;
+
     text-shadow:0 0 20px #ff3131;
 }
 
 p{
+
     color:#bbbbbb;
+
     margin-top:10px;
+
     font-size:18px;
+
     max-width:700px;
 }
 
 video{
+
     margin-top:40px;
+
     width:90%;
+
     max-width:1000px;
+
     border-radius:20px;
-    box-shadow:0 0 40px rgba(255,49,49,0.5);
+
+    box-shadow:
+        0 0 40px rgba(255,49,49,0.5);
 }
+
 
 /* INFO BOX */
 
 .info{
+
     margin-top:40px;
+
     background:#111;
+
     padding:30px;
+
     border-radius:20px;
+
     width:90%;
+
     max-width:1000px;
+
     text-align:left;
 }
 
 .info h2{
+
     color:#ff3131;
+
     margin-bottom:10px;
 }
 
 .info p{
+
     color:#ccc;
 }
+
 
 /* FOOTER */
 
 footer{
+
     margin-top:60px;
+
     text-align:center;
+
     padding:30px;
+
     color:#777;
+
     background:#050505;
 }
 
+
+/* ACHIEVEMENT POPUP */
+
+.achievement-popup{
+
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    z-index:9999;
+
+    background:#111;
+
+    color:white;
+
+    padding:18px 22px;
+
+    border-radius:15px;
+
+    border:1px solid rgba(255,49,49,0.5);
+
+    box-shadow:
+        0 0 35px rgba(255,49,49,0.4);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    animation:
+        popupIn 0.4s ease;
+}
+
+.achievement-popup-icon{
+
+    font-size:32px;
+}
+
+.achievement-popup-title{
+
+    color:#ff3131;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+    margin-bottom:4px;
+}
+
+.achievement-popup-name{
+
+    font-size:16px;
+
+    font-weight:bold;
+}
+
+@keyframes popupIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateX(100px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateX(0);
+    }
+
+}
+
 </style>
+
 </head>
+
+
 <body>
+
+
+<!-- NAVBAR -->
 
 <nav>
 
-<div class="logo">MOVIE HUB</div>
+    <div class="logo">
+        MOVIE HUB
+    </div>
 
-<a href="movies.html">← Back</a>
+    <a href="movies.html">
+        ← Back
+    </a>
 
 </nav>
 
+
+<!-- MOVIE -->
+
 <div class="container">
 
-<h1>The Magical World</h1>
+    <h1>
+        The Magical World
+    </h1>
 
-<p>A magical sci-fi adventure about a baby sent into the future during a devastating war.</p>
 
-<video controls autoplay>
+    <p>
+        A magical sci-fi adventure about a baby
+        sent into the future during a devastating war.
+    </p>
 
-<source src="The dark gamers presents.mp4" type="video/mp4">
 
-Your browser does not support the video tag.
+    <!-- MOVIE VIDEO -->
 
-</video>
+    <video
+        id="movie"
+        controls
+        autoplay
+    >
 
-<div class="info">
+        <source
+            src="The dark gamers presents.mp4"
+            type="video/mp4"
+        >
 
-<h2>About This Movie</h2>
+        Your browser does not support the video tag.
 
-<p>
-A baby is magically sent into the future during a devastating war, where a young kid takes him in and raises him as a little brother.
-    In this strange new world, kids own houses and have built a completely different society.
-    As the brothers grow up, they discover a mysterious wand connected to the baby's past. 
-    Now they must uncover the truth about his parents, the war, and why he was sent to the future.
-</p>
+    </video>
+
+
+    <!-- INFO -->
+
+    <div class="info">
+
+        <h2>
+            About This Movie
+        </h2>
+
+        <p>
+
+            A baby is magically sent into the future
+            during a devastating war, where a young kid
+            takes him in and raises him as a little brother.
+
+            In this strange new world, kids own houses
+            and have built a completely different society.
+
+            As the brothers grow up, they discover a
+            mysterious wand connected to the baby's past.
+
+            Now they must uncover the truth about his
+            parents, the war, and why he was sent
+            to the future.
+
+        </p>
+
+    </div>
 
 </div>
 
-</div>
+
+<!-- FOOTER -->
 
 <footer>
-© 2026 Movie Hub | Zombie Escape
+
+    © 2026 Movie Hub | The Magical World
+
 </footer>
 
+
+<!-- ACHIEVEMENT SYSTEM -->
+
+<script src="achievements.js"></script>
+
+
+<script>
+
+document
+    .getElementById("movie")
+    .addEventListener(
+        "ended",
+        function(){
+
+            movieWatched();
+
+        }
+    );
+
+</script>
+
+
 </body>
+
 </html>
