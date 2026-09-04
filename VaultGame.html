@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>VAULT STACK</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:#020606;
+    color:#00ffcc;
+    font-family:Arial,sans-serif;
+    text-align:center;
+    overflow:hidden;
+}
+
+h1{
+    margin:10px 0 2px;
+    font-size:38px;
+    letter-spacing:5px;
+    text-shadow:0 0 20px #00ffcc;
+}
+
+#stats{
+    font-size:16px;
+    margin-bottom:5px;
+}
+
+canvas{
+    display:block;
+    margin:auto;
+    border:3px solid #00ffcc;
+    border-radius:14px;
+    box-shadow:0 0 30px #00ffcc66;
+    max-width:95vw;
+}
+
+#mission{
+    margin:7px auto;
+    width:500px;
+    max-width:90%;
+    color:#9ffff0;
+    font-size:14px;
+}
+
+button{
+    background:#00ffcc;
+    color:#001411;
+    border:0;
+    padding:10px 20px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+    margin:3px;
+}
+
+button:hover{
+    background:#8ffff0;
+}
+
+#shop{
+    display:none;
+    position:fixed;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    background:#061414;
+    border:2px solid #00ffcc;
+    border-radius:15px;
+    padding:25px;
+    width:330px;
+    box-shadow:0 0 40px #00ffcc66;
+    z-index:5;
+}
+
+.item{
+    border:1px solid #087b6b;
+    padding:10px;
+    margin:8px;
+    border-radius:8px;
+}
+
+#flash{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background:#00ffcc;
+    opacity:0;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🔐 VAULT</h1>
+
+<div id="stats">
+SCORE: 0 | BEST: 0 | COINS: 0 | COMBO: x0
+</div>
+
+<canvas id="game" width="500" height="580"></canvas>
+
+<div id="mission"></div>
+
+<button onclick="restart()">RESTART</button>
+<button onclick="openShop()">💎 EFFECTS</button>
+
+<div id="shop">
+
+<h2>VAULT EFFECTS</h2>
+
+<div class="item">
+⚡ Neon Sparks
+<br>
+<button onclick="buyEffect('neon',25)">25 Coins</button>
+</div>
+
+<div class="item">
+🔥 Fire Sparks
+<br>
+<button onclick="buyEffect('fire',50)">50 Coins</button>
+</div>
+
+<div class="item">
+💎 Diamond Sparks
+<br>
+<button onclick="buyEffect('diamond',100)">100 Coins</button>
+</div>
+
+<button onclick="closeShop()">CLOSE</button>
+
+</div>
+
+<div id="flash"></div>
+
+<script>
+
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
+
+let blocks=[];
+let sparks=[];
+let particles=[];
+
+let current;
+
+let score=0;
+let best=Number(localStorage.vaultBest||0);
+let coins=Number(localStorage.vaultCoins||0);
+
+let combo=0;
+let perfects=0;
+
+let speed=3;
+let gameOver=false;
+
+/* LEVEL SYSTEM */
+
+let level=1;
+let towerCount=0;
+
+const MAX_TILES=23;
+
+/* CAMERA */
+
+let cameraY=0;
+let targetCameraY=0;
+
+/* EFFECT */
+
+let effect=localStorage.vaultEffect||"normal";
+
+/* MISSIONS */
+
+let missionType=0;
+
+const missions=[
+    ["Stack 10 tiles",10],
+    ["Get 5 PERFECT stacks",5],
+    ["Reach a x10 combo",10]
+];
+
+
+/* =========================
+   BACKGROUND PARTICLES
+========================= */
+
+for(let i=0;i<50;i++){
+
+    particles.push({
+        x:Math.random()*500,
+        y:Math.random()*580,
+        r:Math.random()*2+1,
+        speed:Math.random()*.6+.2
+    });
+
+}
+
+
+/* =========================
+   NEW BLOCK
+========================= */
+
+function newBlock(){
+
+    current={
+        x:100,
+        y:40-cameraY,
+        w:150,
+        h:30,
+        vx:speed
+    };
+
+}
+
+
+/* =========================
+   RESTART EVERYTHING
+========================= */
+
+function restart(){
+
+    blocks=[];
+    sparks=[];
+
+    score=0;
+    combo=0;
+    perfects=0;
+
+    speed=3;
+
+    level=1;
+    towerCount=0;
+
+    gameOver=false;
+
+    cameraY=0;
+    targetCameraY=0;
+
+    newBlock();
+
+    updateUI();
+
+}
+
+
+/* =========================
+   START NEW 23-TILE TOWER
+========================= */
+
+function nextTower(){
+
+    blocks=[];
+    sparks=[];
+
+    towerCount=0;
+
+    level++;
+
+    /*
+       Make the next level
+       slightly faster.
+    */
+
+    speed+=.35;
+
+    cameraY=0;
+    targetCameraY=0;
+
+    current={
+        x:100,
+        y:40,
+        w:150,
+        h:30,
+        vx:speed
+    };
+
+    /*
+       Small celebration
+    */
+
+    levelFlash();
+
+    updateUI();
+
+}
+
+
+/* =========================
+   LEVEL FLASH
+========================= */
+
+function levelFlash(){
+
+    let f=document.getElementById("flash");
+
+    f.style.opacity=".25";
+
+    setTimeout(()=>{
+        f.style.opacity="0";
+    },180);
+
+}
+
+
+/* =========================
+   UI
+========================= */
+
+function updateUI(){
+
+    document.getElementById("stats").textContent=
+        "LEVEL: "+level+
+        " | SCORE: "+score+
+        " | BEST: "+best+
+        " | COINS: "+coins+
+        " | COMBO: x"+combo;
+
+
+    let mission=missions[missionType];
+
+    let progress=0;
+
+    if(missionType===0)
+        progress=Math.min(score,mission[1]);
+
+    if(missionType===1)
+        progress=Math.min(perfects,mission[1]);
+
+    if(missionType===2)
+        progress=Math.min(combo,mission[1]);
+
+
+    document.getElementById("mission").textContent=
+        "🎯 MISSION: "+mission[0]+
+        " ("+progress+"/"+mission[1]+
+        ") | TOWER: "+towerCount+
+        "/"+MAX_TILES;
+
+}
+
+
+/* =========================
+   SPARKS
+========================= */
+
+function makeSparks(x,y){
+
+    for(let i=0;i<55;i++){
+
+        let angle=Math.random()*Math.PI*2;
+
+        let power=2+Math.random()*7;
+
+        sparks.push({
+
+            x:x,
+            y:y,
+
+            vx:Math.cos(angle)*power,
+            vy:Math.sin(angle)*power,
+
+            life:30+Math.random()*30,
+
+            size:2+Math.random()*4
+
+        });
+
+    }
+
+}
+
+
+/* =========================
+   UPDATE SPARKS
+========================= */
+
+function updateSparks(){
+
+    for(let s of sparks){
+
+        s.x+=s.vx;
+        s.y+=s.vy;
+
+        s.vy+=.13;
+
+        s.life--;
+
+    }
+
+    sparks=sparks.filter(s=>s.life>0);
+
+}
+
+
+/* =========================
+   SPARK COLOR
+========================= */
+
+function sparkColor(){
+
+    if(effect==="fire")
+        return "#ff6b00";
+
+    if(effect==="diamond")
+        return "#ffffff";
+
+    if(effect==="neon")
+        return "#00ffcc";
+
+    return "#00ffcc";
+
+}
+
+
+/* =========================
+   DRAW SPARKS
+========================= */
+
+function drawSparks(){
+
+    for(let s of sparks){
+
+        ctx.globalAlpha=
+            Math.max(0,s.life/60);
+
+        ctx.fillStyle=sparkColor();
+
+        ctx.shadowBlur=15;
+        ctx.shadowColor=sparkColor();
+
+        ctx.fillRect(
+            s.x,
+            s.y,
+            s.size,
+            s.size
+        );
+
+    }
+
+    ctx.shadowBlur=0;
+    ctx.globalAlpha=1;
+
+}
+
+
+/* =========================
+   PERFECT FLASH
+========================= */
+
+function perfectFlash(){
+
+    let f=document.getElementById("flash");
+
+    f.style.opacity=".18";
+
+    setTimeout(()=>{
+        f.style.opacity="0";
+    },100);
+
+}
+
+
+/* =========================
+   PERFECT TEXT
+========================= */
+
+function perfectText(){
+
+    ctx.save();
+
+    ctx.textAlign="center";
+
+    ctx.font="bold 38px Arial";
+
+    ctx.fillStyle=sparkColor();
+
+    ctx.shadowBlur=20;
+    ctx.shadowColor=sparkColor();
+
+    ctx.fillText(
+        "PERFECT!",
+        250,
+        150
+    );
+
+    if(combo>1){
+
+        ctx.font="bold 25px Arial";
+
+        ctx.fillText(
+            "COMBO x"+combo,
+            250,
+            185
+        );
+
+    }
+
+    ctx.restore();
+
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+function drawBackground(){
+
+    ctx.fillStyle="#020808";
+
+    ctx.fillRect(
+        0,
+        0,
+        500,
+        580
+    );
+
+
+    let glow=ctx.createRadialGradient(
+        250,290,20,
+        250,290,400
+    );
+
+    glow.addColorStop(
+        0,
+        "rgba(0,255,204,.12)"
+    );
+
+    glow.addColorStop(
+        1,
+        "rgba(0,0,0,0)"
+    );
+
+    ctx.fillStyle=glow;
+
+    ctx.fillRect(
+        0,
+        0,
+        500,
+        580
+    );
+
+
+    let offset=(Date.now()/30)%25;
+
+    ctx.strokeStyle=
+        "rgba(0,255,204,.07)";
+
+
+    for(let x=-25;x<525;x+=25){
+
+        ctx.beginPath();
+
+        ctx.moveTo(x+offset,0);
+        ctx.lineTo(x+offset,580);
+
+        ctx.stroke();
+
+    }
+
+
+    for(let y=-25;y<605;y+=25){
+
+        ctx.beginPath();
+
+        ctx.moveTo(0,y+offset);
+        ctx.lineTo(500,y+offset);
+
+        ctx.stroke();
+
+    }
+
+
+    for(let p of particles){
+
+        p.y-=p.speed;
+
+        if(p.y<0)
+            p.y=580;
+
+        ctx.fillStyle="#00ffcc";
+
+        ctx.globalAlpha=.35;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.r,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+
+    }
+
+    ctx.globalAlpha=1;
+
+
+    ctx.save();
+
+    ctx.globalAlpha=.035;
+
+    ctx.fillStyle="#00ffcc";
+
+    ctx.font="bold 75px Arial";
+
+    ctx.textAlign="center";
+
+    ctx.fillText(
+        "VAULT",
+        250,
+        310
+    );
+
+    ctx.restore();
+
+}
+
+
+/* =========================
+   DRAW TILE
+========================= */
+
+function drawBlock(b){
+
+    let g=ctx.createLinearGradient(
+        0,b.y,
+        0,b.y+b.h
+    );
+
+    g.addColorStop(0,"#39ffe0");
+    g.addColorStop(.5,"#00c9a7");
+    g.addColorStop(1,"#087b6b");
+
+    ctx.fillStyle=g;
+
+    ctx.shadowBlur=12;
+    ctx.shadowColor="#00ffcc";
+
+    ctx.fillRect(
+        b.x,
+        b.y,
+        b.w,
+        b.h
+    );
+
+    ctx.shadowBlur=0;
+
+    ctx.strokeStyle="#bafff5";
+
+    ctx.lineWidth=2;
+
+    ctx.strokeRect(
+        b.x,
+        b.y,
+        b.w,
+        b.h
+    );
+
+    ctx.fillStyle="#003b34";
+
+    ctx.font="bold 12px Arial";
+
+    ctx.fillText(
+        "VAULT",
+        b.x+10,
+        b.y+20
+    );
+
+}
+
+
+/* =========================
+   DROP
+========================= */
+
+function drop(){
+
+    if(gameOver)
+        return;
+
+
+    /*
+       First tile
+    */
+
+    if(blocks.length===0){
+
+        current.y=520;
+
+        blocks.push({...current});
+
+        towerCount++;
+
+        score++;
+
+        newBlock();
+
+        updateUI();
+
+        return;
+
+    }
+
+
+    let last=
+        blocks[blocks.length-1];
+
+
+    let left=
+        Math.max(
+            current.x,
+            last.x
+        );
+
+
+    let right=
+        Math.min(
+            current.x+current.w,
+            last.x+last.w
+        );
+
+
+    /*
+       MISSED
+    */
+
+    if(right-left<20){
+
+        combo=0;
+
+        gameOver=true;
+
+        return;
+
+    }
+
+
+    let difference=
+        Math.abs(
+            current.x-last.x
+        );
+
+
+    /*
+       PERFECT
+    */
+
+    if(difference<8){
+
+        perfects++;
+
+        combo++;
+
+        let bonus=
+            2+combo;
+
+        score+=bonus;
+
+        coins+=bonus;
+
+
+        makeSparks(
+            left+(right-left)/2,
+            last.y
+        );
+
+
+        perfectFlash();
+
+
+        if(
+            missionType===1 &&
+            perfects>=5
+        ){
+
+            missionComplete();
+
+        }
+
+
+        if(
+            missionType===2 &&
+            combo>=10
+        ){
+
+            missionComplete();
+
+        }
+
+    }
+
+    else{
+
+        combo=0;
+
+        score++;
+
+        coins++;
+
+    }
+
+
+    current.x=left;
+
+    current.w=right-left;
+
+    current.y=
+        last.y-current.h;
+
+
+    blocks.push({...current});
+
+
+    towerCount++;
+
+
+    /*
+       Speed gets faster
+    */
+
+    speed+=.13;
+
+
+    /*
+       Save best
+    */
+
+    if(score>best){
+
+        best=score;
+
+        localStorage.vaultBest=
+            best;
+
+    }
+
+
+    localStorage.vaultCoins=
+        coins;
+
+
+    /*
+       CAMERA SCROLL
+    */
+
+    if(current.y<100){
+
+        targetCameraY=
+            current.y-100;
+
+    }
+
+
+    /*
+       REACHED 23 TILES!
+    */
+
+    if(towerCount>=MAX_TILES){
+
+        /*
+           Keep score,
+           coins,
+           missions,
+           combo,
+           effects.
+
+           Only clear the tiles.
+        */
+
+        setTimeout(()=>{
+            nextTower();
+        },300);
+
+        return;
+
+    }
+
+
+    updateUI();
+
+    newBlock();
+
+}
+
+
+/* =========================
+   MISSION COMPLETE
+========================= */
+
+function missionComplete(){
+
+    coins+=50;
+
+    missionType++;
+
+    if(missionType>=missions.length)
+        missionType=0;
+
+    localStorage.vaultCoins=
+        coins;
+
+    updateUI();
+
+}
+
+
+/* =========================
+   SHOP
+========================= */
+
+function openShop(){
+
+    document.getElementById("shop")
+        .style.display="block";
+
+}
+
+
+function closeShop(){
+
+    document.getElementById("shop")
+        .style.display="none";
+
+}
+
+
+function buyEffect(type,cost){
+
+    if(effect===type){
+
+        alert("Already equipped!");
+
+        return;
+
+    }
+
+
+    if(coins<cost){
+
+        alert("Not enough VAULT Coins!");
+
+        return;
+
+    }
+
+
+    coins-=cost;
+
+    effect=type;
+
+
+    localStorage.vaultCoins=
+        coins;
+
+    localStorage.vaultEffect=
+        effect;
+
+
+    updateUI();
+
+
+    alert(
+        type.toUpperCase()+
+        " EFFECT EQUIPPED!"
+    );
+
+}
+
+
+/* =========================
+   DRAW
+========================= */
+
+function draw(){
+
+    drawBackground();
+
+
+    /*
+       Smooth camera
+    */
+
+    cameraY+=
+        (targetCameraY-cameraY)*.08;
+
+
+    /*
+       Draw tower
+    */
+
+    for(let b of blocks){
+
+        drawBlock({
+
+            ...b,
+
+            y:b.y-cameraY
+
+        });
+
+    }
+
+
+    /*
+       Current tile
+    */
+
+    if(
+        current &&
+        !gameOver
+    ){
+
+        drawBlock({
+
+            ...current,
+
+            y:current.y-cameraY
+
+        });
+
+    }
+
+
+    /*
+       Sparks
+    */
+
+    ctx.save();
+
+    ctx.translate(
+        0,
+        -cameraY
+    );
+
+    drawSparks();
+
+    ctx.restore();
+
+
+    if(sparks.length>0)
+        perfectText();
+
+
+    /*
+       GAME OVER
+    */
+
+    if(gameOver){
+
+        ctx.fillStyle=
+            "rgba(0,0,0,.8)";
+
+        ctx.fillRect(
+            0,
+            0,
+            500,
+            580
+        );
+
+
+        ctx.textAlign="center";
+
+
+        ctx.fillStyle="#00ffcc";
+
+        ctx.font=
+            "bold 42px Arial";
+
+        ctx.shadowBlur=20;
+        ctx.shadowColor="#00ffcc";
+
+        ctx.fillText(
+            "VAULT LOCKED",
+            250,
+            260
+        );
+
+
+        ctx.shadowBlur=0;
+
+        ctx.fillStyle="white";
+
+        ctx.font="20px Arial";
+
+        ctx.fillText(
+            "SCORE: "+score,
+            250,
+            305
+        );
+
+
+        ctx.fillStyle="#00ffcc";
+
+        ctx.font="16px Arial";
+
+        ctx.fillText(
+            "LEVEL: "+level,
+            250,
+            335
+        );
+
+
+        ctx.fillText(
+            "PERFECTS: "+perfects,
+            250,
+            360
+        );
+
+    }
+
+}
+
+
+/* =========================
+   GAME LOOP
+========================= */
+
+function update(){
+
+    if(
+        !gameOver &&
+        current
+    ){
+
+        current.x+=current.vx;
+
+
+        if(
+            current.x<=0 ||
+            current.x+current.w>=500
+        ){
+
+            current.vx*=-1;
+
+        }
+
+    }
+
+
+    updateSparks();
+
+    draw();
+
+    requestAnimationFrame(update);
+
+}
+
+
+/* =========================
+   CONTROLS
+========================= */
+
+document.addEventListener(
+    "keydown",
+    e=>{
+
+        if(e.code==="Space"){
+
+            e.preventDefault();
+
+            drop();
+
+        }
+
+
+        if(
+            e.key==="ArrowLeft" &&
+            current
+        ){
+
+            current.x-=25;
+
+        }
+
+
+        if(
+            e.key==="ArrowRight" &&
+            current
+        ){
+
+            current.x+=25;
+
+        }
+
+    }
+);
+
+
+/* =========================
+   START
+========================= */
+
+restart();
+update();
+
+</script>
+
+</body>
+</html>
