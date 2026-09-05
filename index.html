@@ -672,7 +672,7 @@ footer {
 
 
             <input
-                id="c"
+                id="code"
                 type="password"
                 maxlength="4"
                 inputmode="numeric"
@@ -727,20 +727,44 @@ footer {
 
 <script>
 
-let a = "1234";
-let b = "2135";
-let c = "9284"
+let l = "0134";
+let r = "0114";
+let s = "9857";
+let w = "0136";
+let x = "0864";
+let y = "0854";
+let z = "0034";
+let a = "4756";
+let b = "9345";
+let m = "0134";
+let n = "8375";
+let o = "0184";
+let p = "8375";
+let q = "0194";
+let t = "8375";
+let u = "5865";
+let v = "0154";
+let c = "7392";
+let d = "0134";
+let e = "1934";
+let f = "8674";
+let h = "8534";
+let i = "0134";
+let j = "8495";
+let k = "8486";
+
+    
 
 function login() {
 
     let guess =
-        document.getElementById("code").value;
+        document.getElementById("c").value;
 
     let result =
         document.getElementById("result");
 
 
-    if (guess === code) {
+    if (guess === c) {
 
         result.className = "success";
 
@@ -763,7 +787,7 @@ function login() {
         result.innerHTML =
             "✕ ACCESS DENIED";
 
-        document.getElementById("code").value = "";
+        document.getElementById("c").value = "";
 
     }
 
@@ -773,7 +797,7 @@ function login() {
 /* ENTER KEY */
 
 document
-    .getElementById("code")
+    .getElementById("c")
     .addEventListener(
         "keydown",
         function(event) {
