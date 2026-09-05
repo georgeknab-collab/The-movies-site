@@ -1,32 +1,795 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<title>Admin</title>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>George's Universe — Admin</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@300;400;500;700&display=swap"
+    rel="stylesheet"
+>
+
+<style>
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+    --red: #e8271e;
+    --bg: #070707;
+    --surface: #101010;
+    --surface2: #151515;
+    --border: rgba(255,255,255,0.08);
+    --text: #f0ede8;
+    --muted: #777;
+
+}
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+body {
+
+    font-family: 'DM Sans', sans-serif;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+header {
+
+    height: 78px;
+
+    padding: 0 45px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    border-bottom:
+        1px solid var(--border);
+
+    background:
+        rgba(7,7,7,0.88);
+
+    backdrop-filter:
+        blur(18px);
+
+}
+
+
+.logo {
+
+    font-family:
+        'Archivo Black',
+        sans-serif;
+
+    font-size: 21px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.logo span {
+
+    color: var(--red);
+
+}
+
+
+.back {
+
+    color: var(--muted);
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    padding: 10px 17px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 999px;
+
+    transition: 0.2s;
+
+}
+
+
+.back:hover {
+
+    color: white;
+
+    border-color:
+        rgba(255,255,255,0.25);
+
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+main {
+
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 50px 20px;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+/* RED GLOW */
+
+main::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 550px;
+
+    height: 550px;
+
+    border-radius: 50%;
+
+    background: var(--red);
+
+    filter: blur(220px);
+
+    opacity: 0.09;
+
+    top: -250px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+}
+
+
+/* SECOND GLOW */
+
+main::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+
+    height: 350px;
+
+    border-radius: 50%;
+
+    background: #4c36ff;
+
+    filter: blur(200px);
+
+    opacity: 0.04;
+
+    right: -150px;
+
+    bottom: -150px;
+
+}
+
+
+/* =====================================================
+   LOGIN CARD
+===================================================== */
+
+.login-card {
+
+    width: 100%;
+
+    max-width: 460px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #151515,
+            #0c0c0c
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 28px;
+
+    padding: 50px 45px;
+
+    position: relative;
+
+    z-index: 2;
+
+    box-shadow:
+        0 30px 100px
+        rgba(0,0,0,0.5);
+
+}
+
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.admin-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    margin: 0 auto 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 22px;
+
+    background:
+        rgba(232,39,30,0.08);
+
+    border:
+        1px solid
+        rgba(232,39,30,0.25);
+
+    font-size: 34px;
+
+    box-shadow:
+        0 0 40px
+        rgba(232,39,30,0.08);
+
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.eyebrow {
+
+    text-align: center;
+
+    color: var(--red);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+
+}
+
+
+h1 {
+
+    font-family:
+        'Archivo Black',
+        sans-serif;
+
+    text-align: center;
+
+    font-size: 42px;
+
+    letter-spacing: 2px;
+
+    line-height: 1;
+
+}
+
+
+.subtitle {
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 14px;
+
+    margin-top: 15px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form {
+
+    margin-top: 35px;
+
+}
+
+
+label {
+
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+
+}
+
+
+input {
+
+    width: 100%;
+
+    padding: 17px;
+
+    background: #090909;
+
+    color: white;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 14px;
+
+    outline: none;
+
+    font-size: 25px;
+
+    text-align: center;
+
+    letter-spacing: 10px;
+
+    transition: 0.2s;
+
+}
+
+
+input:focus {
+
+    border-color:
+        rgba(232,39,30,0.6);
+
+    box-shadow:
+        0 0 25px
+        rgba(232,39,30,0.1);
+
+}
+
+
+/* =====================================================
+   LOGIN BUTTON
+===================================================== */
+
+button {
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 999px;
+
+    background: var(--red);
+
+    color: white;
+
+    font-family:
+        'DM Sans',
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 30px
+        rgba(232,39,30,0.2);
+
+    transition: 0.2s;
+
+}
+
+
+button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 0 45px
+        rgba(232,39,30,0.4);
+
+}
+
+
+button:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =====================================================
+   RESULT
+===================================================== */
+
+#result {
+
+    min-height: 25px;
+
+    margin-top: 18px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+}
+
+
+/* ERROR */
+
+.error {
+
+    color: var(--red);
+
+}
+
+
+/* SUCCESS */
+
+.success {
+
+    color: #35d07f;
+
+}
+
+
+/* =====================================================
+   SECURITY NOTICE
+===================================================== */
+
+.security {
+
+    margin-top: 30px;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,0.02);
+
+    border:
+        1px solid var(--border);
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    border-top:
+        1px solid var(--border);
+
+    padding: 30px 20px;
+
+    text-align: center;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px) {
+
+    header {
+
+        padding: 0 20px;
+
+    }
+
+    .logo {
+
+        font-size: 16px;
+
+    }
+
+    .login-card {
+
+        padding: 40px 25px;
+
+    }
+
+    h1 {
+
+        font-size: 34px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
+
 <body>
 
-<h1>ADMIN LOGIN</h1>
-<p>Enter the 4 digit code:</p>
 
-<input id="code" maxlength="4">
-<button onclick="login()">LOGIN</button>
+<header>
 
-<p id="result"></p>
+    <div class="logo">
+
+        GEORGE'S <span>UNIVERSE</span>
+
+    </div>
+
+
+    <a
+        href="boom.html"
+        class="back"
+    >
+
+        ← Back
+
+    </a>
+
+</header>
+
+
+<main>
+
+
+    <div class="login-card">
+
+
+        <div class="admin-icon">
+
+            🔐
+
+        </div>
+
+
+        <div class="eyebrow">
+
+            RESTRICTED AREA
+
+        </div>
+
+
+        <h1>
+
+            ADMIN LOGIN
+
+        </h1>
+
+
+        <p class="subtitle">
+
+            Enter the administrator access code
+            to continue.
+
+        </p>
+
+
+        <div class="form">
+
+
+            <label>
+
+                4-DIGIT ACCESS CODE
+
+            </label>
+
+
+            <input
+                id="c"
+                type="password"
+                maxlength="4"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="••••"
+            >
+
+
+            <button
+                onclick="login()"
+            >
+
+                🔓 LOGIN
+
+            </button>
+
+
+            <p id="result"></p>
+
+
+        </div>
+
+
+        <div class="security">
+
+            🛡️ <strong>SECURE AREA</strong>
+
+            <br>
+
+            This area is restricted to
+            authorized administrators.
+
+        </div>
+
+
+    </div>
+
+
+</main>
+
+
+<footer>
+
+    <strong>GEORGE'S UNIVERSE</strong>
+
+    <br><br>
+
+    Admin Portal • © 2026 George's Universe
+
+</footer>
+
 
 <script>
-let code = "7392";
 
-function login(){
-  let guess = document.getElementById("code").value;
+let a = "1234";
+let b = "2135";
+let c = "9284"
 
-  if(guess == code){
-    window.location.href = "boom.html";
-  }else{
-    document.getElementById("result").innerHTML =
-    "ACCESS DENIED";
-  }
+function login() {
+
+    let guess =
+        document.getElementById("code").value;
+
+    let result =
+        document.getElementById("result");
+
+
+    if (guess === code) {
+
+        result.className = "success";
+
+        result.innerHTML =
+            "✓ ACCESS GRANTED";
+
+        setTimeout(function() {
+
+            window.location.href =
+                "boom.html";
+
+        }, 500);
+
+    }
+
+    else {
+
+        result.className = "error";
+
+        result.innerHTML =
+            "✕ ACCESS DENIED";
+
+        document.getElementById("code").value = "";
+
+    }
+
 }
+
+
+/* ENTER KEY */
+
+document
+    .getElementById("code")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                login();
+
+            }
+
+        }
+    );
+
 </script>
 
+
 </body>
+
 </html>
