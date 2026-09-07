@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact — George's Universe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --red:#e8271e;
+    --bg:#070707;
+    --surface:#101010;
+    --border:rgba(255,255,255,.08);
+    --text:#f0ede8;
+    --muted:#777;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:"DM Sans",sans-serif;
+    background:
+        radial-gradient(circle at 50% 0%,rgba(232,39,30,.18),transparent 35%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+header{
+    height:70px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--border);
+    background:#090909;
+}
+
+.logo{
+    font-family:"Archivo Black";
+    font-size:20px;
+}
+
+.logo span{
+    color:var(--red);
+}
+
+.back{
+    color:#aaa;
+    text-decoration:none;
+}
+
+.back:hover{
+    color:white;
+}
+
+main{
+    max-width:850px;
+    margin:auto;
+    padding:80px 20px;
+    text-align:center;
+}
+
+.icon{
+    font-size:55px;
+    margin-bottom:20px;
+}
+
+h1{
+    font-family:"Archivo Black";
+    font-size:clamp(42px,7vw,75px);
+    line-height:1;
+    margin-bottom:20px;
+}
+
+h1 span{
+    color:var(--red);
+}
+
+.subtitle{
+    max-width:600px;
+    margin:auto;
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.7;
+}
+
+.contact-card{
+    margin:50px auto 20px;
+    max-width:600px;
+    padding:35px;
+    background:linear-gradient(145deg,#121212,#0c0c0c);
+    border:1px solid var(--border);
+    border-radius:20px;
+}
+
+.contact-card h2{
+    font-family:"Archivo Black";
+    margin-bottom:25px;
+}
+
+.phone{
+    display:block;
+    padding:20px;
+    margin:12px 0;
+    background:#171717;
+    border:1px solid var(--border);
+    border-radius:12px;
+    color:white;
+    text-decoration:none;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.phone:hover{
+    border-color:var(--red);
+    background:#211010;
+}
+
+.label{
+    display:block;
+    color:#777;
+    font-size:12px;
+    margin-bottom:6px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.notice{
+    margin-top:25px;
+    color:#666;
+    font-size:13px;
+    line-height:1.6;
+}
+
+footer{
+    text-align:center;
+    padding:40px;
+    color:#555;
+}
+
+@media(max-width:600px){
+    main{
+        padding-top:55px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        GEORGE'S <span>UNIVERSE</span>
+    </div>
+
+    <a class="back" href="index.html">
+        ← Back
+    </a>
+
+</header>
+
+
+<main>
+
+    <div class="icon">📞</div>
+
+    <h1>
+        CONTACT <span>US</span>
+    </h1>
+
+    <p class="subtitle">
+        Need help with George's Universe?
+        Contact us using one of the phone numbers below.
+    </p>
+
+
+    <div class="contact-card">
+
+        <h2>CONTACT NUMBERS</h2>
+
+
+        <a class="phone" href="tel:8542589563">
+
+            <span class="label">
+                Main Contact/George
+            </span>
+
+            📞 (854) 258-9563
+
+        </a>
+
+
+        <a class="phone" href="tel:7064016786">
+
+            <span class="label">
+                Support/Rady
+            </span>
+
+            📞 (706) 401-6786
+
+        </a>
+
+
+        <p class="notice">
+            Please call these numbers if you want to talk,
+            have help, or have a question about George's Universe.
+        </p>
+
+    </div>
+
+</main>
+
+
+<footer>
+    © 2026 George's Universe
+</footer>
+
+</body>
+</html>
