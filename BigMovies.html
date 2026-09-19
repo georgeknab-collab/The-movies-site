@@ -1,0 +1,504 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VAULT — Video Hub</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#080808;
+    color:white;
+}
+
+/* NAVBAR */
+
+nav{
+    height:75px;
+    width:100%;
+
+    position:fixed;
+    top:0;
+    left:0;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 40px;
+
+    background:#090909;
+    border-bottom:2px solid #e00000;
+
+    z-index:1000;
+}
+
+/* VAULT LOGO */
+
+.logo{
+    font-size:32px;
+    font-weight:900;
+    letter-spacing:4px;
+
+    color:white;
+
+    text-shadow:
+        0 0 8px white,
+        0 0 20px #e00000;
+}
+
+.logo span{
+    color:#e00000;
+}
+
+/* BACK BUTTON */
+
+nav a{
+    text-decoration:none;
+    color:white;
+
+    background:#e00000;
+
+    padding:11px 20px;
+    border-radius:8px;
+
+    font-weight:bold;
+
+    transition:0.25s;
+}
+
+nav a:hover{
+    background:white;
+    color:#e00000;
+}
+
+/* MAIN */
+
+.container{
+    padding:120px 30px 60px;
+
+    max-width:1300px;
+    margin:auto;
+}
+
+/* HEADER */
+
+.header{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.header h1{
+    font-size:58px;
+    letter-spacing:5px;
+
+    color:white;
+
+    text-shadow:
+        0 0 10px white,
+        0 0 30px #e00000;
+}
+
+.header h1 span{
+    color:#e00000;
+}
+
+.header p{
+    margin-top:12px;
+    color:#999;
+    font-size:18px;
+}
+
+/* VIDEO GRID */
+
+.video-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(300px, 1fr));
+
+    gap:30px;
+}
+
+/* VIDEO CARD */
+
+.video-card{
+    background:#111;
+
+    border:1px solid #2a2a2a;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    transition:0.3s;
+
+    box-shadow:0 0 0 rgba(224,0,0,0);
+}
+
+.video-card:hover{
+    transform:translateY(-7px);
+
+    border-color:#e00000;
+
+    box-shadow:
+        0 0 30px rgba(224,0,0,0.35);
+}
+
+/* VIDEO */
+
+.video-card video{
+    width:100%;
+    display:block;
+
+    background:#000;
+}
+
+/* VIDEO INFORMATION */
+
+.video-info{
+    padding:20px;
+}
+
+.video-info h2{
+    color:white;
+    font-size:23px;
+    margin-bottom:8px;
+}
+
+.video-info h2 span{
+    color:#e00000;
+}
+
+.video-info p{
+    color:#999;
+    line-height:1.5;
+}
+
+/* TAG */
+
+.tag{
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:6px 10px;
+
+    border-radius:5px;
+
+    background:#e00000;
+
+    color:white;
+
+    font-size:12px;
+    font-weight:bold;
+
+    letter-spacing:1px;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+
+    padding:35px;
+
+    background:#050505;
+
+    border-top:1px solid #222;
+
+    color:#666;
+}
+
+footer strong{
+    color:#e00000;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+        <span>V</span>AULT
+    </div>
+
+    <a href="boom.html">
+        ← Back
+    </a>
+
+</nav>
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            <span>VAULT</span> VIDEO HUB
+        </h1>
+
+        <p>
+            Welcome to the VAULT. Watch videos, projects,
+            missions, and recordings.
+        </p>
+
+    </div>
+
+
+    <!-- VIDEOS -->
+
+    <div class="video-grid">
+
+
+        <!-- VIDEO 1 -->
+
+        <div class="video-card">
+
+            <video controls>
+
+                <source
+                    src="video1.mp4"
+                    type="video/mp4"
+                >
+
+                Your browser does not support video.
+
+            </video>
+
+            <div class="video-info">
+
+                <h2>
+                    <span>01.</span> The Magical World
+                </h2>
+
+                <p>
+                    A mysterious adventure involving
+                    a baby, the future, and a strange world.
+                </p>
+
+                <div class="tag">
+                    MOVIE
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 2 -->
+
+        <div class="video-card">
+
+            <video controls>
+
+                <source
+                    src="video2.mp4"
+                    type="video/mp4"
+                >
+
+                Your browser does not support video.
+
+            </video>
+
+            <div class="video-info">
+
+                <h2>
+                    <span>02.</span> VAULT Mission
+                </h2>
+
+                <p>
+                    A new mission begins inside the
+                    VAULT computer network.
+                </p>
+
+                <div class="tag">
+                    VAULT
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 3 -->
+
+        <div class="video-card">
+
+            <video controls>
+
+                <source
+                    src="video3.mp4"
+                    type="video/mp4"
+                >
+
+                Your browser does not support video.
+
+            </video>
+
+            <div class="video-info">
+
+                <h2>
+                    <span>03.</span> DarkGamers
+                </h2>
+
+                <p>
+                    Enter the world of DarkGamers and
+                    discover what happens behind the scenes.
+                </p>
+
+                <div class="tag">
+                    DARKGAMERS
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 4 -->
+
+        <div class="video-card">
+
+            <video controls>
+
+                <source
+                    src="video4.mp4"
+                    type="video/mp4"
+                >
+
+                Your browser does not support video.
+
+            </video>
+
+            <div class="video-info">
+
+                <h2>
+                    <span>04.</span> Behind The Scenes
+                </h2>
+
+                <p>
+                    See what happens while new projects
+                    are being created.
+                </p>
+
+                <div class="tag">
+                    BTS
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 5 -->
+
+        <div class="video-card">
+
+            <video controls>
+
+                <source
+                    src="video5.mp4"
+                    type="video/mp4"
+                >
+
+                Your browser does not support video.
+
+            </video>
+
+            <div class="video-info">
+
+                <h2>
+                    <span>05.</span> Secret Project
+                </h2>
+
+                <p>
+                    A classified VAULT recording.
+                    More information coming soon.
+                </p>
+
+                <div class="tag">
+                    CLASSIFIED
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- VIDEO 6 -->
+
+        <div class="video-card">
+
+            <video controls>
+
+                <source
+                    src="video6.mp4"
+                    type="video/mp4"
+                >
+
+                Your browser does not support video.
+
+            </video>
+
+            <div class="video-info">
+
+                <h2>
+                    <span>06.</span> Project Log
+                </h2>
+
+                <p>
+                    Another recording from the
+                    VAULT project archives.
+                </p>
+
+                <div class="tag">
+                    ARCHIVE
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong>VAULT</strong>
+    — Computer Projects & Creative Archives
+
+</footer>
+
+
+</body>
+
+</html>
