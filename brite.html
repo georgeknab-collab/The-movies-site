@@ -1,0 +1,558 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BRITE* — Ideas Start Here</title>
+
+<style>
+:root {
+  --bg: #080b12;
+  --panel: #111725;
+  --bright: #c7ff55;
+  --blue: #69e7ff;
+  --text: #f4f7ff;
+  --muted: #a1abc0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 8%;
+  border-bottom: 1px solid #222b3b;
+  position: sticky;
+  top: 0;
+  background: rgba(8,11,18,.94);
+  backdrop-filter: blur(12px);
+  z-index: 10;
+}
+
+.logo {
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+
+.logo span { color: var(--bright); }
+
+nav {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+nav a:hover { color: var(--bright); }
+
+.hero {
+  min-height: 590px;
+  padding: 110px 8% 90px;
+  display: flex;
+  align-items: center;
+  background:
+    radial-gradient(ellipse at 80% 30%, #253a2b 0%, transparent 35%),
+    radial-gradient(ellipse at 15% 90%, #122b3c 0%, transparent 35%);
+}
+
+.hero-content { max-width: 850px; }
+
+.tag {
+  display: inline-block;
+  color: var(--bright);
+  border: 1px solid #526a31;
+  background: #182414;
+  border-radius: 30px;
+  padding: 7px 15px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: clamp(52px, 9vw, 100px);
+  line-height: 1;
+  letter-spacing: -5px;
+  margin: 25px 0;
+}
+
+h1 span { color: var(--bright); }
+
+.hero p {
+  color: var(--muted);
+  font-size: 18px;
+  max-width: 600px;
+  margin-bottom: 30px;
+}
+
+.button {
+  display: inline-block;
+  padding: 13px 21px;
+  background: var(--bright);
+  color: #10150b;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px #c7ff5544;
+}
+
+.button.secondary {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid #394457;
+  margin-left: 8px;
+}
+
+section { padding: 85px 8%; }
+
+.section-label {
+  color: var(--bright);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+h2 {
+  font-size: clamp(30px, 5vw, 48px);
+  line-height: 1.15;
+  margin-bottom: 18px;
+}
+
+.section-intro {
+  color: var(--muted);
+  max-width: 650px;
+  margin-bottom: 35px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  padding: 28px;
+  background: var(--panel);
+  border: 1px solid #273144;
+  border-radius: 15px;
+  transition: transform .2s, border-color .2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: var(--bright);
+}
+
+.card .icon {
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+.card h3 { margin-bottom: 10px; }
+
+.card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.generator {
+  background: linear-gradient(135deg, #121c20, #121426);
+  border: 1px solid #35463b;
+  border-radius: 20px;
+  padding: 35px;
+  max-width: 800px;
+}
+
+.generator select, .idea-input {
+  width: 100%;
+  background: #090e17;
+  color: var(--text);
+  border: 1px solid #344054;
+  padding: 13px;
+  border-radius: 8px;
+  margin: 10px 0 18px;
+  font-size: 15px;
+}
+
+.idea-result {
+  min-height: 100px;
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: 10px;
+  background: #0a1018;
+  border: 1px dashed #526a31;
+  color: var(--bright);
+  font-size: 19px;
+}
+
+.small-note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+#ideaList {
+  display: grid;
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.saved-idea {
+  padding: 18px;
+  border: 1px solid #273144;
+  border-radius: 10px;
+  background: var(--panel);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  overflow-wrap: anywhere;
+}
+
+.saved-idea button {
+  flex-shrink: 0;
+  background: transparent;
+  color: #ff8585;
+  border: 1px solid #713b48;
+  border-radius: 6px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.join {
+  text-align: center;
+  background: radial-gradient(ellipse at center, #202d1b, transparent 70%);
+}
+
+.join p {
+  color: var(--muted);
+  max-width: 600px;
+  margin: 0 auto 25px;
+}
+
+footer {
+  text-align: center;
+  padding: 28px 8%;
+  border-top: 1px solid #222b3b;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+footer strong { color: var(--bright); }
+
+@media (max-width: 600px) {
+  header { padding: 16px 5%; }
+  nav { gap: 12px; }
+  nav a { font-size: 12px; }
+  .hero { padding: 85px 6%; }
+  h1 { letter-spacing: -3px; }
+  section { padding: 65px 6%; }
+  .button.secondary { margin: 10px 0 0; }
+  .generator { padding: 22px; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">BRITE<span>*</span></div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#missions">What We Do</a>
+    <a href="#generator">Idea Generator</a>
+    <a href="#saved">Saved Ideas</a>
+  </nav>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="tag">A GROUP BUILT AROUND IDEAS</div>
+      <h1>THINK BIG.<br>THINK BRITE<span>*</span></h1>
+      <p>
+        BRITE* is a group dedicated to helping people develop ideas,
+        explore possibilities, and turn creative thinking into exciting projects.
+        Every great project starts with a thought.
+      </p>
+      <a class="button" href="#generator">Generate an Idea ↗</a>
+      <a class="button secondary" href="#about">Discover BRITE*</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-label">01 / Who We Are</div>
+    <h2>Good ideas can come from anywhere.</h2>
+    <p class="section-intro">
+      BRITE* helps people think of new possibilities. Whether you're planning
+      a website, designing a game, creating a movie, or starting something
+      completely new, we're here to help ideas grow.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">💡</div>
+        <h3>Discover Ideas</h3>
+        <p>Explore new concepts and find inspiration for your next project.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🧠</div>
+        <h3>Solve Problems</h3>
+        <p>Look at challenges in new ways and brainstorm possible solutions.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🚀</div>
+        <h3>Build Something</h3>
+        <p>Turn promising ideas into plans, experiments, and creative projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="missions">
+    <div class="section-label">02 / Our Mission</div>
+    <h2>From “what if?” to “what's next?”</h2>
+    <p class="section-intro">
+      BRITE* believes creativity gets stronger when people have space to
+      explore, improve, and share ideas. We focus on brainstorming,
+      collaboration, and finding new directions for projects.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🎮</div>
+        <h3>Game Ideas</h3>
+        <p>Invent new mechanics, characters, worlds, challenges, and game concepts.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🌐</div>
+        <h3>Website Ideas</h3>
+        <p>Plan useful websites, creative tools, online communities, and features.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎬</div>
+        <h3>Creative Projects</h3>
+        <p>Brainstorm stories, videos, inventions, events, and other projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="generator">
+    <div class="section-label">03 / Get Inspired</div>
+    <h2>Your next idea starts here.</h2>
+    <p class="section-intro">
+      Not sure what to make? Pick a category and let BRITE* give you
+      a starting point.
+    </p>
+
+    <div class="generator">
+      <label for="category">Choose an idea category:</label>
+      <select id="category">
+        <option value="all">Anything</option>
+        <option value="game">Video Games</option>
+        <option value="website">Websites</option>
+        <option value="movie">Movies & Videos</option>
+        <option value="invention">Inventions</option>
+        <option value="community">Community Projects</option>
+      </select>
+
+      <button class="button" onclick="generateIdea()">✨ Generate Idea</button>
+
+      <div class="idea-result" id="ideaResult" aria-live="polite">
+        Your next big idea could appear here.
+      </div>
+
+      <button class="button secondary" onclick="saveIdea()">Save This Idea</button>
+      <p class="small-note" id="generatorMessage">
+        Generate an idea, then save your favorites on this device.
+      </p>
+    </div>
+  </section>
+
+  <section id="saved">
+    <div class="section-label">04 / Your Collection</div>
+    <h2>Ideas worth keeping.</h2>
+    <p class="section-intro">
+      Your saved ideas appear below. They're stored in this browser on this
+      device, so they aren't automatically shared with other people.
+    </p>
+
+    <div id="ideaList"></div>
+    <p id="emptyMessage" class="small-note">You haven't saved any ideas yet.</p>
+  </section>
+
+  <section class="join">
+    <div class="section-label">THE BRITE* MINDSET</div>
+    <h2>One thought can start something big.</h2>
+    <p>
+      Stay curious. Explore possibilities. Keep creating.
+      That's what BRITE* is all about.
+    </p>
+    <a href="#generator" class="button">Find Your Next Idea</a>
+  </section>
+
+</main>
+
+<footer>
+  <p>BRITE<strong>*</strong> — Helping ideas shine.</p>
+  <p>Part of a world of creativity and new possibilities.</p>
+</footer>
+
+<script>
+const ideas = {
+  game: [
+    "Create a game where the world changes every time the player makes a choice.",
+    "Design a puzzle game where light and shadows reveal hidden paths.",
+    "Invent a multiplayer game where players build a shared island.",
+    "Make a game where the player can invent their own special abilities."
+  ],
+  website: [
+    "Build a website where visitors can suggest and vote on new project ideas.",
+    "Create an interactive map that shows fictional places and their stories.",
+    "Design a website that turns a short description into a project plan.",
+    "Make a community page where creators can showcase their projects."
+  ],
+  movie: [
+    "Create a short mystery about a message that appears from the future.",
+    "Make a comedy about a team whose inventions never work as expected.",
+    "Write a science-fiction story about discovering a hidden world.",
+    "Film a mini-documentary about how an idea becomes a finished project."
+  ],
+  invention: [
+    "Design a desk organizer that changes shape for different activities.",
+    "Imagine a reusable notebook that helps organize project plans.",
+    "Invent a simple tool that makes brainstorming with friends easier.",
+    "Design a model of a future city with smarter public spaces."
+  ],
+  community: [
+    "Start a weekly challenge where everyone suggests one creative idea.",
+    "Create a shared list of problems people would like to solve.",
+    "Plan a showcase where creators present their newest projects.",
+    "Organize a friendly brainstorming session around one big question."
+  ]
+};
+
+let currentIdea = "";
+
+function generateIdea() {
+  const category = document.getElementById("category").value;
+  let pool = [];
+
+  if (category === "all") {
+    pool = Object.values(ideas).flat();
+  } else {
+    pool = ideas[category] || [];
+  }
+
+  const differentIdeas = pool.filter(idea => idea !== currentIdea);
+  const choices = differentIdeas.length ? differentIdeas : pool;
+
+  currentIdea = choices[Math.floor(Math.random() * choices.length)];
+
+  document.getElementById("ideaResult").textContent = currentIdea;
+  document.getElementById("generatorMessage").textContent =
+    "Like it? Save it to your idea collection!";
+}
+
+function getSavedIdeas() {
+  try {
+    const stored = JSON.parse(localStorage.getItem("briteIdeas") || "[]");
+    return Array.isArray(stored)
+      ? stored.filter(item => typeof item === "string")
+      : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveIdea() {
+  if (!currentIdea) {
+    document.getElementById("generatorMessage").textContent =
+      "Generate an idea first!";
+    return;
+  }
+
+  const saved = getSavedIdeas();
+
+  if (saved.includes(currentIdea)) {
+    document.getElementById("generatorMessage").textContent =
+      "You've already saved this idea!";
+    return;
+  }
+
+  saved.unshift(currentIdea);
+  localStorage.setItem("briteIdeas", JSON.stringify(saved));
+  document.getElementById("generatorMessage").textContent =
+    "Idea saved! You can find it in your collection below.";
+
+  renderIdeas();
+}
+
+function deleteIdea(idea) {
+  const saved = getSavedIdeas().filter(item => item !== idea);
+  localStorage.setItem("briteIdeas", JSON.stringify(saved));
+  renderIdeas();
+}
+
+function renderIdeas() {
+  const list = document.getElementById("ideaList");
+  const empty = document.getElementById("emptyMessage");
+  const saved = getSavedIdeas();
+
+  list.replaceChildren();
+  empty.style.display = saved.length ? "none" : "block";
+
+  saved.forEach(idea => {
+    const row = document.createElement("div");
+    row.className = "saved-idea";
+
+    const text = document.createElement("span");
+    text.textContent = idea;
+
+    const remove = document.createElement("button");
+    remove.textContent = "Delete";
+    remove.setAttribute("aria-label", "Delete saved idea");
+    remove.addEventListener("click", () => deleteIdea(idea));
+
+    row.append(text, remove);
+    list.appendChild(row);
+  });
+}
+
+renderIdeas();
+</script>
+
+</body>
+</html>
