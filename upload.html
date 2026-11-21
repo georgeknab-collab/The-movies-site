@@ -1,16 +1,19 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VAULT — Movie Hub</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+
 <style>
 :root {
-  --red: #e8271e;
-  --red-dim: rgba(232,39,30,0.12);
-  --red-glow: rgba(232,39,30,0.35);
+  --red: #f04b24;
+  --red-dim: rgba(240,75,36,0.12);
+  --red-glow: rgba(240,75,36,0.35);
   --bg: #080808;
   --surface: #111111;
   --surface2: #181818;
@@ -21,9 +24,15 @@
   --muted2: #444;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background: var(--bg);
@@ -34,7 +43,8 @@ body {
   overflow-x: hidden;
 }
 
-/* grain overlay */
+/* GRAIN */
+
 body::before {
   content: '';
   position: fixed;
@@ -45,39 +55,34 @@ body::before {
   opacity: 0.35;
 }
 
-/* ─── BACK BUTTON (UPDATED) ───────────────────────────── */
+/* BACK BUTTON */
+
 .back-btn {
   position: fixed;
   top: 88px;
   left: 24px;
   z-index: 100;
-
   padding: 10px 16px;
   border-radius: 999px;
-
-  background: rgba(17, 17, 17, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(17,17,17,0.7);
+  border: 1px solid rgba(255,255,255,0.08);
   backdrop-filter: blur(12px);
-
   color: var(--text);
-  font-family: 'DM Sans', sans-serif;
   font-size: 13px;
-  letter-spacing: 0.5px;
   text-decoration: none;
-
-  transition: all 0.25s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transition: 0.25s;
 }
 
 .back-btn:hover {
   transform: translateX(-4px);
   border-color: var(--red);
-  background: rgba(232, 39, 30, 0.12);
+  background: var(--red-dim);
   box-shadow: 0 0 25px var(--red-glow);
   color: var(--red);
 }
 
-/* ─── HEADER ─────────────────────────────── */
+/* HEADER */
+
 header {
   position: sticky;
   top: 0;
@@ -97,18 +102,20 @@ header {
   font-size: 22px;
   letter-spacing: 6px;
   color: var(--text);
-  text-transform: uppercase;
 }
-.logo span { color: var(--red); }
+
+.logo span {
+  color: var(--red);
+}
 
 .header-count {
   font-size: 12px;
   letter-spacing: 2px;
   color: var(--muted);
-  text-transform: uppercase;
 }
 
-/* ─── HERO UPLOAD ────────────────────────── */
+/* UPLOAD */
+
 .upload-zone {
   margin: 50px 40px 20px;
   border: 1px dashed var(--muted2);
@@ -116,7 +123,7 @@ header {
   padding: 48px 40px;
   text-align: center;
   background: var(--surface);
-  transition: border-color 0.3s, background 0.3s;
+  transition: 0.3s;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -128,38 +135,43 @@ header {
   inset: 0;
   background: radial-gradient(ellipse at 50% 0%, var(--red-dim), transparent 70%);
   opacity: 0;
-  transition: opacity 0.4s;
+  transition: 0.4s;
 }
 
-.upload-zone:hover, .upload-zone.drag-over {
+.upload-zone:hover,
+.upload-zone.drag-over {
   border-color: var(--red);
   background: #141414;
 }
-.upload-zone:hover::before, .upload-zone.drag-over::before { opacity: 1; }
+
+.upload-zone:hover::before,
+.upload-zone.drag-over::before {
+  opacity: 1;
+}
 
 .upload-icon {
   font-size: 42px;
   margin-bottom: 16px;
   display: block;
-  line-height: 1;
 }
 
 .upload-zone h2 {
   font-family: 'Archivo Black', sans-serif;
   font-size: 20px;
-  letter-spacing: 1px;
   margin-bottom: 8px;
-  color: var(--text);
 }
 
 .upload-zone p {
   font-size: 13px;
   color: var(--muted);
   margin-bottom: 24px;
-  letter-spacing: 0.5px;
 }
 
-#fileInput { display: none; }
+#fileInput {
+  display: none;
+}
+
+/* BUTTONS */
 
 .btn-primary {
   display: inline-flex;
@@ -172,20 +184,41 @@ header {
   border-radius: 50px;
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
   cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  transition: 0.2s;
   box-shadow: 0 4px 24px var(--red-glow);
+  position: relative;
+  z-index: 2;
 }
+
 .btn-primary:hover {
   transform: translateY(-2px);
-  background: #f03028;
+  background: #ff6038;
   box-shadow: 0 8px 32px var(--red-glow);
 }
-.btn-primary:active { transform: scale(0.97); }
 
-/* ─── TOOLBAR ────────────────────────────── */
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-ghost {
+  padding: 9px 18px;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: var(--red-dim);
+}
+
+/* TOOLBAR */
+
 .toolbar {
   display: flex;
   align-items: center;
@@ -200,31 +233,12 @@ header {
   font-family: 'Archivo Black', sans-serif;
   font-size: 13px;
   letter-spacing: 3px;
+  color: var(--muted);
   text-transform: uppercase;
-  color: var(--muted);
 }
 
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 9px 18px;
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-ghost:hover {
-  border-color: var(--red);
-  color: var(--red);
-  background: var(--red-dim);
-}
+/* GRID */
 
-/* ─── GRID ───────────────────────────────── */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -232,29 +246,37 @@ header {
   padding: 0 40px 60px;
 }
 
-/* ─── CARD ───────────────────────────────── */
+/* MOVIE CARDS */
+
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
-  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: 0.3s;
   cursor: pointer;
   animation: fadeUp 0.4s ease both;
 }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .card:hover {
   border-color: var(--border-hover);
   transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 0 1px var(--border-hover);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
 }
 
-/* thumbnail */
+/* THUMBNAILS */
+
 .thumb {
   height: 170px;
   background: #0e0e0e;
@@ -272,7 +294,9 @@ header {
   display: none;
 }
 
-.thumb-canvas.loaded { display: block; }
+.thumb-canvas.loaded {
+  display: block;
+}
 
 .thumb-placeholder {
   display: flex;
@@ -281,10 +305,18 @@ header {
   gap: 8px;
   color: var(--muted2);
 }
-.thumb-placeholder span { font-size: 36px; line-height: 1; }
-.thumb-placeholder p { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; }
 
-/* play overlay */
+.thumb-placeholder span {
+  font-size: 36px;
+}
+
+.thumb-placeholder p {
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+/* PLAY OVERLAY */
+
 .play-overlay {
   position: absolute;
   inset: 0;
@@ -293,9 +325,12 @@ header {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.25s;
+  transition: 0.25s;
 }
-.card:hover .play-overlay { opacity: 1; }
+
+.card:hover .play-overlay {
+  opacity: 1;
+}
 
 .play-btn-circle {
   width: 54px;
@@ -307,9 +342,12 @@ header {
   justify-content: center;
   box-shadow: 0 0 28px var(--red-glow);
   transform: scale(0.85);
-  transition: transform 0.2s;
+  transition: 0.2s;
 }
-.card:hover .play-btn-circle { transform: scale(1); }
+
+.card:hover .play-btn-circle {
+  transform: scale(1);
+}
 
 .play-triangle {
   width: 0;
@@ -320,7 +358,8 @@ header {
   margin-left: 4px;
 }
 
-/* card body */
+/* CARD BODY */
+
 .card-body {
   padding: 16px 18px 18px;
 }
@@ -333,14 +372,12 @@ header {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 4px;
-  letter-spacing: 0.3px;
 }
 
 .card-meta {
   font-size: 11px;
   color: var(--muted);
   letter-spacing: 1px;
-  text-transform: uppercase;
   margin-bottom: 14px;
 }
 
@@ -357,12 +394,14 @@ header {
   border-radius: 8px;
   color: white;
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
   cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
+  transition: 0.2s;
 }
-.btn-card-play:hover { background: #f03028; transform: scale(1.02); }
+
+.btn-card-play:hover {
+  background: #ff6038;
+  transform: scale(1.02);
+}
 
 .btn-card-del {
   padding: 9px 14px;
@@ -370,35 +409,51 @@ header {
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--muted);
-  font-size: 15px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: 0.2s;
 }
+
 .btn-card-del:hover {
-  border-color: #e8271e88;
+  border-color: #f04b2488;
   color: var(--red);
   background: var(--red-dim);
 }
 
-/* ─── EMPTY STATE ────────────────────────── */
+/* EMPTY STATE */
+
 .empty {
   grid-column: 1 / -1;
   text-align: center;
   padding: 80px 20px;
   color: var(--muted2);
 }
-.empty-icon { font-size: 56px; margin-bottom: 20px; display: block; line-height: 1; }
+
+.empty-icon {
+  font-size: 56px;
+  margin-bottom: 20px;
+  display: block;
+}
+
 .empty h3 {
   font-family: 'Archivo Black', sans-serif;
   font-size: 18px;
   letter-spacing: 2px;
   color: var(--muted);
   margin-bottom: 8px;
-  text-transform: uppercase;
 }
-.empty p { font-size: 13px; letter-spacing: 0.5px; }
 
-/* ─── MODAL ──────────────────────────────── */
+/* STATUS */
+
+#uploadStatus {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  padding: 0 20px 25px;
+  min-height: 20px;
+}
+
+/* MODAL */
+
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -406,22 +461,24 @@ header {
   display: none;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
   z-index: 200;
   padding: 30px;
   backdrop-filter: blur(12px);
-  animation: none;
 }
+
 .modal-backdrop.open {
   display: flex;
   animation: fadeIn 0.2s ease;
 }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
 .modal-inner {
   width: 100%;
   max-width: 960px;
-  position: relative;
 }
 
 .modal-title-bar {
@@ -434,11 +491,6 @@ header {
 .modal-film-title {
   font-family: 'Archivo Black', sans-serif;
   font-size: 18px;
-  letter-spacing: 1px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 80%;
 }
 
 .btn-close {
@@ -450,30 +502,64 @@ header {
   color: var(--muted);
   font-size: 18px;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  flex-shrink: 0;
 }
-.btn-close:hover { background: var(--red); border-color: var(--red); color: white; }
+
+.btn-close:hover {
+  background: var(--red);
+  color: white;
+}
 
 .modal-video {
   width: 100%;
   border-radius: 14px;
   display: block;
   background: #000;
-  box-shadow: 0 0 80px rgba(0,0,0,0.8), 0 0 0 1px var(--border);
   max-height: 70vh;
 }
 
-/* ─── SCROLLBAR ──────────────────────────── */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--muted); }
+/* SCROLLBAR */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted2);
+  border-radius: 3px;
+}
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+  header {
+    padding: 0 20px;
+  }
+
+  .upload-zone {
+    margin: 35px 15px 20px;
+    padding: 40px 20px;
+  }
+
+  .toolbar {
+    padding: 0 20px;
+  }
+
+  .grid {
+    padding: 0 15px 40px;
+  }
+
+  .back-btn {
+    top: 78px;
+    left: 15px;
+  }
+}
 </style>
 </head>
+
 <body>
 
 <a href="movies.html" class="back-btn">← Back</a>
@@ -483,175 +569,521 @@ header {
   <div class="header-count" id="header-count">0 FILMS</div>
 </header>
 
+<!-- UPLOAD AREA -->
+
 <div class="upload-zone" id="uploadZone">
   <span class="upload-icon">⬆</span>
-  <h2>Drop your film here</h2>
-  <p>MP4, MOV, AVI, MKV — any video format</p>
-  <button class="btn-primary" onclick="document.getElementById('fileInput').click()">
-    Choose File
+
+  <h2>Drop your films here</h2>
+
+  <p>Select or drop multiple video files at once</p>
+
+  <button class="btn-primary"
+    onclick="document.getElementById('fileInput').click()">
+    Choose Files
   </button>
-  <input type="file" id="fileInput" accept="video/*">
+
+  <input
+    type="file"
+    id="fileInput"
+    accept="video/*"
+    multiple
+  >
 </div>
+
+<div id="uploadStatus"></div>
+
+<!-- TOOLBAR -->
 
 <div class="toolbar">
   <div class="toolbar-left" id="toolbar-label">Library</div>
-  <button class="btn-ghost" onclick="clearAll()">✕ &nbsp;Clear all</button>
+
+  <button class="btn-ghost" onclick="clearAll()">
+    ✕ &nbsp;Clear all
+  </button>
 </div>
+
+<!-- MOVIE GRID -->
 
 <div class="grid" id="grid"></div>
 
-<!-- MODAL -->
+<!-- VIDEO PLAYER -->
+
 <div class="modal-backdrop" id="modal">
   <div class="modal-inner">
+
     <div class="modal-title-bar">
       <div class="modal-film-title" id="modal-title">—</div>
+
       <button class="btn-close" onclick="closeModal()">✕</button>
     </div>
+
     <video class="modal-video" id="player" controls></video>
+
   </div>
 </div>
 
 <script>
-let movies = JSON.parse(localStorage.getItem("vault_movies") || "[]");
 
-/* ── upload ── */
+/* =========================
+   STORAGE
+========================= */
+
+let movies = [];
+
+try {
+  movies = JSON.parse(
+    localStorage.getItem("vault_movies") || "[]"
+  );
+
+  if (!Array.isArray(movies)) movies = [];
+
+} catch (error) {
+  movies = [];
+}
+
 const fileInput = document.getElementById("fileInput");
 const uploadZone = document.getElementById("uploadZone");
+const uploadStatus = document.getElementById("uploadStatus");
 
-fileInput.addEventListener("change", e => {
-  if (e.target.files[0]) processFile(e.target.files[0]);
+
+/* =========================
+   MULTIPLE FILE UPLOAD
+========================= */
+
+fileInput.addEventListener("change", event => {
+
+  const files = Array.from(event.target.files);
+
+  uploadFiles(files);
+
+  // Allows selecting the same files again later.
+  fileInput.value = "";
+
 });
 
-uploadZone.addEventListener("dragover", e => {
-  e.preventDefault();
-  uploadZone.classList.add("drag-over");
-});
-uploadZone.addEventListener("dragleave", () => uploadZone.classList.remove("drag-over"));
-uploadZone.addEventListener("drop", e => {
-  e.preventDefault();
-  uploadZone.classList.remove("drag-over");
-  const f = e.dataTransfer.files[0];
-  if (f && f.type.startsWith("video/")) processFile(f);
-});
 
-function processFile(file) {
-  const reader = new FileReader();
-  reader.onload = ev => {
-    movies.push({ id: Date.now(), name: cleanName(file.name), data: ev.target.result });
-    save(); render();
-  };
-  reader.readAsDataURL(file);
-}
+function uploadFiles(files) {
 
-function cleanName(n) {
-  return n.replace(/\.[^.]+$/, "").replace(/[_\-\.]+/g, " ").trim();
-}
+  const validFiles = files.filter(file =>
+    file.type.startsWith("video/")
+  );
 
-/* ── persistence ── */
-function save() { localStorage.setItem("vault_movies", JSON.stringify(movies)); }
-
-/* ── render ── */
-function render() {
-  const grid = document.getElementById("grid");
-  const count = document.getElementById("header-count");
-  const label = document.getElementById("toolbar-label");
-  count.textContent = movies.length + (movies.length === 1 ? " FILM" : " FILMS");
-  label.textContent = movies.length > 0 ? `Library — ${movies.length} title${movies.length > 1 ? "s" : ""}` : "Library";
-
-  if (movies.length === 0) {
-    grid.innerHTML = `<div class="empty">
-      <span class="empty-icon">🎞</span>
-      <h3>Vault is empty</h3>
-      <p>Upload a film to get started</p>
-    </div>`;
+  if (validFiles.length === 0) {
+    uploadStatus.textContent = "Please select video files.";
     return;
   }
 
-  grid.innerHTML = movies.map((m, i) => `
-    <div class="card" style="animation-delay:${i * 0.05}s" onclick="playMovie(${m.id})">
-      <div class="thumb">
-        <canvas class="thumb-canvas" id="canvas-${m.id}" width="280" height="170"></canvas>
-        <div class="thumb-placeholder" id="placeholder-${m.id}">
-          <span>🎬</span>
-          <p>Loading preview</p>
-        </div>
-        <div class="play-overlay">
-          <div class="play-btn-circle"><div class="play-triangle"></div></div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">${m.name}</div>
-        <div class="card-meta">VIDEO FILE</div>
-        <div class="card-actions">
-          <button class="btn-card-play" onclick="event.stopPropagation(); playMovie(${m.id})">▶ Play</button>
-          <button class="btn-card-del" onclick="event.stopPropagation(); deleteMovie(${m.id})" title="Delete">🗑</button>
-        </div>
-      </div>
-    </div>
-  `).join("");
+  let completed = 0;
+  let added = 0;
 
-  movies.forEach(m => generateThumb(m));
+  uploadStatus.textContent =
+    `Uploading ${validFiles.length} video(s)...`;
+
+  validFiles.forEach(file => {
+
+    const reader = new FileReader();
+
+    reader.onload = event => {
+
+      const movie = {
+        id: Date.now() + Math.random(),
+        name: cleanName(file.name),
+        data: event.target.result
+      };
+
+      movies.push(movie);
+
+      completed++;
+      added++;
+
+      save();
+      render();
+
+      if (completed === validFiles.length) {
+        uploadStatus.textContent =
+          `${added} video(s) added to your library!`;
+      }
+
+    };
+
+    reader.onerror = () => {
+
+      completed++;
+
+      if (completed === validFiles.length) {
+        uploadStatus.textContent =
+          `${added} video(s) added. Some files could not be loaded.`;
+      }
+
+    };
+
+    reader.readAsDataURL(file);
+
+  });
+
 }
 
-/* ── thumbnail via hidden video ── */
-function generateThumb(m) {
-  const vid = document.createElement("video");
-  vid.src = m.data;
-  vid.muted = true;
-  vid.currentTime = 2;
-  vid.addEventListener("seeked", () => {
-    const canvas = document.getElementById("canvas-" + m.id);
-    const placeholder = document.getElementById("placeholder-" + m.id);
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    ctx.drawImage(vid, 0, 0, 280, 170);
-    canvas.classList.add("loaded");
-    if (placeholder) placeholder.style.display = "none";
-    vid.src = "";
-  }, { once: true });
-  vid.load();
-}
 
-/* ── playback ── */
-function playMovie(id) {
-  const m = movies.find(x => x.id === id);
-  if (!m) return;
-  const modal = document.getElementById("modal");
-  const player = document.getElementById("player");
-  const title = document.getElementById("modal-title");
-  title.textContent = m.name;
-  player.src = m.data;
-  modal.classList.add("open");
-  player.play();
-}
+/* =========================
+   DRAG AND DROP
+========================= */
 
-function closeModal() {
-  const modal = document.getElementById("modal");
-  const player = document.getElementById("player");
-  player.pause();
-  player.src = "";
-  modal.classList.remove("open");
-}
+uploadZone.addEventListener("dragover", event => {
 
-document.addEventListener("keydown", e => {
-  if (e.key === "Escape") closeModal();
+  event.preventDefault();
+
+  uploadZone.classList.add("drag-over");
+
 });
 
-function deleteMovie(id) {
-  movies = movies.filter(m => m.id !== id);
-  save(); render();
+
+uploadZone.addEventListener("dragleave", () => {
+
+  uploadZone.classList.remove("drag-over");
+
+});
+
+
+uploadZone.addEventListener("drop", event => {
+
+  event.preventDefault();
+
+  uploadZone.classList.remove("drag-over");
+
+  const files = Array.from(event.dataTransfer.files);
+
+  uploadFiles(files);
+
+});
+
+
+/* =========================
+   CLEAN FILE NAMES
+========================= */
+
+function cleanName(name) {
+
+  return name
+    .replace(/\.[^.]+$/, "")
+    .replace(/[_\-\.]+/g, " ")
+    .trim();
+
 }
+
+
+/* =========================
+   SAVE
+========================= */
+
+function save() {
+
+  try {
+
+    localStorage.setItem(
+      "vault_movies",
+      JSON.stringify(movies)
+    );
+
+  } catch (error) {
+
+    uploadStatus.textContent =
+      "Storage is full. Try smaller video files.";
+
+  }
+
+}
+
+
+/* =========================
+   RENDER MOVIES
+========================= */
+
+function render() {
+
+  const grid = document.getElementById("grid");
+
+  const count = document.getElementById("header-count");
+
+  const label = document.getElementById("toolbar-label");
+
+  count.textContent =
+    movies.length +
+    (movies.length === 1 ? " FILM" : " FILMS");
+
+  label.textContent =
+    movies.length > 0
+      ? `Library — ${movies.length} titles`
+      : "Library";
+
+
+  if (movies.length === 0) {
+
+    grid.innerHTML = `
+      <div class="empty">
+        <span class="empty-icon">🎞</span>
+        <h3>Vault is empty</h3>
+        <p>Upload films to get started</p>
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  grid.innerHTML = movies.map((movie, index) => `
+
+    <div class="card"
+      style="animation-delay:${index * 0.05}s"
+      onclick="playMovie('${movie.id}')">
+
+      <div class="thumb">
+
+        <canvas
+          class="thumb-canvas"
+          id="canvas-${movie.id}"
+          width="280"
+          height="170">
+        </canvas>
+
+        <div
+          class="thumb-placeholder"
+          id="placeholder-${movie.id}">
+
+          <span>🎬</span>
+          <p>Loading preview</p>
+
+        </div>
+
+        <div class="play-overlay">
+          <div class="play-btn-circle">
+            <div class="play-triangle"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="card-body">
+
+        <div class="card-title"></div>
+
+        <div class="card-meta">VIDEO FILE</div>
+
+        <div class="card-actions">
+
+          <button class="btn-card-play"
+            onclick="event.stopPropagation(); playMovie('${movie.id}')">
+            ▶ Play
+          </button>
+
+          <button class="btn-card-del"
+            onclick="event.stopPropagation(); deleteMovie('${movie.id}')"
+            title="Delete">
+            🗑
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  `).join("");
+
+
+  movies.forEach((movie, index) => {
+
+    const cards = grid.querySelectorAll(".card");
+
+    if (cards[index]) {
+      cards[index].querySelector(".card-title").textContent =
+        movie.name;
+    }
+
+    generateThumb(movie);
+
+  });
+
+}
+
+
+/* =========================
+   GENERATE THUMBNAILS
+========================= */
+
+function generateThumb(movie) {
+
+  const video = document.createElement("video");
+
+  video.src = movie.data;
+  video.muted = true;
+  video.preload = "metadata";
+
+  video.addEventListener("loadedmetadata", () => {
+
+    video.currentTime = Math.min(2, video.duration || 0);
+
+  }, { once: true });
+
+
+  video.addEventListener("seeked", () => {
+
+    const canvas =
+      document.getElementById("canvas-" + movie.id);
+
+    const placeholder =
+      document.getElementById("placeholder-" + movie.id);
+
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d");
+
+    ctx.drawImage(video, 0, 0, 280, 170);
+
+    canvas.classList.add("loaded");
+
+    if (placeholder) {
+      placeholder.style.display = "none";
+    }
+
+    video.removeAttribute("src");
+    video.load();
+
+  }, { once: true });
+
+
+  video.addEventListener("error", () => {
+    // Keep the placeholder if a preview cannot be generated.
+  }, { once: true });
+
+  video.load();
+
+}
+
+
+/* =========================
+   PLAY MOVIE
+========================= */
+
+function playMovie(id) {
+
+  const movie = movies.find(
+    item => String(item.id) === String(id)
+  );
+
+  if (!movie) return;
+
+  const modal = document.getElementById("modal");
+
+  const player = document.getElementById("player");
+
+  const title = document.getElementById("modal-title");
+
+  title.textContent = movie.name;
+
+  player.src = movie.data;
+
+  modal.classList.add("open");
+
+  player.play().catch(error => {
+    console.log("Press play to start the video.");
+  });
+
+}
+
+
+/* =========================
+   CLOSE PLAYER
+========================= */
+
+function closeModal() {
+
+  const modal = document.getElementById("modal");
+
+  const player = document.getElementById("player");
+
+  player.pause();
+
+  player.removeAttribute("src");
+
+  player.load();
+
+  modal.classList.remove("open");
+
+}
+
+
+document.addEventListener("keydown", event => {
+
+  if (event.key === "Escape") {
+    closeModal();
+  }
+
+});
+
+
+document.getElementById("modal").addEventListener("click", event => {
+
+  if (event.target.id === "modal") {
+    closeModal();
+  }
+
+});
+
+
+/* =========================
+   DELETE MOVIE
+========================= */
+
+function deleteMovie(id) {
+
+  movies = movies.filter(
+    movie => String(movie.id) !== String(id)
+  );
+
+  save();
+
+  render();
+
+}
+
+
+/* =========================
+   CLEAR ALL
+========================= */
 
 function clearAll() {
+
   if (movies.length === 0) return;
-  if (confirm(`Remove all ${movies.length} film${movies.length > 1 ? "s" : ""} from Vault?`)) {
-    localStorage.removeItem("vault_movies");
+
+  const confirmed = confirm(
+    `Remove all ${movies.length} films from Vault?`
+  );
+
+  if (confirmed) {
+
     movies = [];
+
+    save();
+
     render();
+
+    uploadStatus.textContent =
+      "Your library has been cleared.";
+
   }
+
 }
 
+
+/* =========================
+   START WEBSITE
+========================= */
+
 render();
+
 </script>
+
 </body>
 </html>
